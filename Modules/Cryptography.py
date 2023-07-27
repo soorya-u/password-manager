@@ -17,11 +17,11 @@ class Cryptography:
         cls.key=None
     
     @classmethod
-    def encrypt(cls,string):
+    def encrypt(cls,string,unique_key):
         string_bytes = bytes(string,'utf-8')
-        return Fernet(cls.key).encrypt(string_bytes)
+        return Fernet(unique_key).encrypt(string_bytes)
 
     @classmethod
-    def decrypt(cls,string_byte):
-        string = Fernet(cls.key).decrypt(string_byte).decode()
+    def decrypt(cls,string_byte,unique_key):
+        string = Fernet(unique_key).decrypt(string_byte).decode()
         return string
