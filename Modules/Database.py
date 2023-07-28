@@ -3,11 +3,17 @@ import sqlite3
 
 class Database:
 
+    # * Function to Establish SQLite Connection
+    # * No Parameters
+    # * Return Value: Connection
     @classmethod
     def sqliteConnection(cls):
         conn = sqlite3.connect('.database/database.db')
         return conn
     
+    # * Function to Create userTable
+    # * No Parameters
+    # * No Return Value
     @classmethod
     def init(cls):
         if not os.path.exists('.database'):
@@ -24,6 +30,9 @@ class Database:
                 ''')
             conn.close()
 
+    # * Function to insert User and create a Account Table
+    # * Parameters: First Name, Master Username, Hashed Password, Unique Key
+    # * No Return Value
     @classmethod
     def userInsertion(cls,first_name,master_user_name,hashed_password,unique_key):
         conn = Database.sqliteConnection()
@@ -44,7 +53,9 @@ class Database:
             ''')
         conn.close()
     
-    @classmethod
+    # * Function to insert Account
+    # * Parameters: Master Username, Platform, URL, Email, Username, Encrypted Password
+    # * No Return Value
     def accountInsertion(cls,master_user_name,platform,url,email,user_name,encrypted_password):
         conn = Database.sqliteConnection()
         c = conn.cursor()
@@ -54,15 +65,21 @@ class Database:
         conn.commit()
         conn.close()
 
+    # * Function to get User Information
+    # * Parameters: Master Useranme
+    # * Return Value: Complete row of UserData -> List
     @classmethod
     def getUserInfo(cls,master_user_name):
         conn = Database.sqliteConnection()
         c = conn.cursor()
-        data = c.execute(f'''select * from userTable where master_user_name="{master_user_name}"''').fetchall()[0]
+        data = list(c.execute(f'''select * from userTable where master_user_name="{master_user_name}"''').fetchall()[0])
         conn.commit()
         conn.close()
         return data
 
+    # * Function to get Account List
+    # * Parameters: Master Username
+    # * Return Value: All Account List -> List
     @classmethod
     def getAccountTable(cls,master_user_name):
         conn = Database.sqliteConnection()
