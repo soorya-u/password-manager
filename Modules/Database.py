@@ -53,3 +53,21 @@ class Database:
             ''')
         conn.commit()
         conn.close()
+
+    @classmethod
+    def getUserInfo(cls,master_user_name):
+        conn = Database.sqliteConnection()
+        c = conn.cursor()
+        data = c.execute(f'''select * from userTable where master_user_name="{master_user_name}"''').fetchall()[0]
+        conn.commit()
+        conn.close()
+        return data
+
+    @classmethod
+    def getAccountTable(cls,master_user_name):
+        conn = Database.sqliteConnection()
+        c = conn.cursor()
+        data = c.execute(f'''select * from {master_user_name}''').fetchall()
+        conn.commit()
+        conn.close()
+        return data
