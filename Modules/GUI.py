@@ -4,7 +4,8 @@ from PIL import Image, ImageTk
 
 class GUI:
 
-    __login_geometry="500x250"
+    __login_geometry = "500x290"
+    __register_geometry = "500x325"
     __images = None
 
     # * Function to Fetch Images
@@ -23,21 +24,17 @@ class GUI:
 
     # * Login Page Screen
     # * Parameters: root
-    # * Return Value: Master User Name, Master Password
+    # * Return Value: ?
     @classmethod
     def login(cls, root):
 
         master_user_name = StringVar()
         master_password = StringVar()
-
-        def getInfo():
-            return [master_user_name, master_password]
-
         f = Frame(root, width=500, height=195, bg='#333333')
 
         Label(
             f,
-            text="Login Form",
+            text="Sign In",
             font=('Kamerik 105 W00 Bold', 24),
             bg='#333333',
             fg='white'
@@ -47,7 +44,6 @@ class GUI:
             columnspan=2,
             pady=(15, 0)
         )
-
         Label(
             f,
             text="Username: ",
@@ -59,20 +55,18 @@ class GUI:
             column=0,
             pady=(25, 5)
         )
-
         Entry(
             f,
-            textvariable=master_user_name,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
+            textvariable=master_user_name
         ).grid(
             row=1,
             column=1,
             pady=(25, 10)
         )
-
         Label(
             f,
             text="Password: ",
@@ -83,7 +77,6 @@ class GUI:
             row=2,
             column=0,
         )
-
         Entry(
             f,
             textvariable=master_password,
@@ -95,27 +88,51 @@ class GUI:
             row=2,
             column=1
         )
-
         Button(
             f,
             width=7,
             height=1,
             relief=SOLID,
             borderwidth=2,
-            text="Login",
+            #    command=partial(fun, cls.__info),
+            text="Sign In",
             font=('Kamerik 105 W00 Bold', 10),
-            command=getInfo,
             bg='#454545',
             highlightcolor="white",
             highlightbackground="white",
             highlightthickness=4,
-            fg='white'
+            fg='#75E6DA'
         ).grid(
-            row=3,
+            row=4,
             column=0,
             columnspan=2,
+            #   padx=(0,30),
             pady=(20, 0)
         )
+
+        Label(
+            f,
+            text="Dont Have an Account?",
+            font=('JetBrains Mono Medium', 9),
+            bg='#333333',
+            fg='white'
+        ).grid(
+            row=5,
+            column=0,
+            columnspan=2,
+            pady=(12, 0)
+        )
+
+        l = Label(
+            f,
+            text="Register",
+            font=('Kamerik 105 W00 Bold', 12),
+            bg='#333333',
+            fg='#75E6DA',
+            cursor='hand2'
+        )
+        l.bind("<Button-1>")
+        l.grid(row=6, column=0, columnspan=2)
 
         f.pack()
 
@@ -124,6 +141,11 @@ class GUI:
     # * No Return Value
     @classmethod
     def successfullMessage(cls, root, action):
+
+        if (action == 'Login'):
+            pad = 145
+        else:
+            pad = 125
 
         f = Frame(root, width=500, height=55, bg='#333333')
 
@@ -134,7 +156,7 @@ class GUI:
         ).grid(
             row=0,
             column=0,
-            padx=(145, 0),
+            padx=(pad, 0),
             pady=(0, 5)
         )
 
@@ -158,6 +180,11 @@ class GUI:
     @classmethod
     def unsuccessfullMessage(cls, root, action):
 
+        if action == 'Login':
+            pad = 150
+        else:
+            pad = 120
+
         f2 = Frame(root, width=500, height=55, bg='#333333')
 
         Label(
@@ -167,7 +194,7 @@ class GUI:
         ).grid(
             row=0,
             column=0,
-            padx=(151, 10),
+            padx=(pad, 10),
             pady=(0, 5)
         )
         Label(
@@ -185,9 +212,148 @@ class GUI:
         f2.pack(side='bottom', anchor='center', fill='both')
 
     # * Register Page Screen
+    # * Parameters: root
+    # * Return Value: ?
     @classmethod
-    def register():
-        pass
+    def register(cls, root):
+        full_name = StringVar()
+        master_user_name = StringVar()
+        master_password = StringVar()
+
+        f = Frame(root, width=500, height=305, bg='#333333')
+
+        Label(
+            f,
+            text="Sign Up",
+            font=('Kamerik 105 W00 Bold', 24),
+            bg='#333333',
+            fg='#75E6DA'
+        ).grid(row=0,
+               column=0,
+               columnspan=2,
+               pady=(15, 0)
+               )
+
+        Label(
+            f,
+            text="Full Name: ",
+            font=('JetBrains Mono Medium', 12),
+            bg='#333333',
+            fg='white'
+        ).grid(
+            row=1,
+            column=0,
+            pady=(25, 5)
+        )
+
+        Entry(
+            f,
+            font=('JetBrains Mono Medium', 12),
+            bg='#595959',
+            fg='white',
+            relief=SOLID,
+            textvariable=full_name
+        ).grid(
+            row=1,
+            column=1,
+            pady=(25, 10)
+        )
+
+        Label(
+            f,
+            text="Username: ",
+            font=('JetBrains Mono Medium', 12),
+            bg='#333333',
+            fg='white'
+        ).grid(
+            row=2,
+            column=0,
+            pady=(0, 5)
+        )
+
+        Entry(
+            f,
+            font=('JetBrains Mono Medium', 12),
+            bg='#595959',
+            fg='white',
+            relief=SOLID,
+            textvariable=master_user_name
+        ).grid(
+            row=2,
+            column=1,
+            pady=(0, 10)
+        )
+
+        Label(
+            f,
+            text="Password: ",
+            font=('JetBrains Mono Medium', 12),
+            bg='#333333',
+            fg='white'
+        ).grid(
+            row=3,
+            column=0,
+        )
+
+        Entry(
+            f,
+            textvariable=master_password,
+            font=('JetBrains Mono Medium', 12),
+            bg='#595959',
+            fg='white',
+            relief=SOLID,
+        ).grid(
+            row=3,
+            column=1
+        )
+
+        Button(
+            f,
+            width=7,
+            height=1,
+            relief=SOLID,
+            borderwidth=2,
+            #    command=partial(fun, cls.__info),
+            text="Sign Up",
+            font=('Kamerik 105 W00 Bold', 10),
+            bg='#454545',
+            highlightcolor="white",
+            highlightbackground="white",
+            highlightthickness=4,
+            fg='#75E6DA'
+        ).grid(
+            row=4,
+            column=0,
+            columnspan=2,
+            pady=(20, 0)
+        )
+
+        Label(
+            f,
+            text="Already Have an Account?",
+            font=('JetBrains Mono Medium', 9),
+            bg='#333333',
+            fg='white'
+        ).grid(
+            row=5,
+            column=0,
+            columnspan=2,
+            pady=(12, 0)
+        )
+
+        l = Label(
+            f,
+            text="Login",
+            font=('Kamerik 105 W00 Bold', 12),
+            bg='#333333',
+            fg='#75E6DA',
+            cursor='hand2'
+        )
+        # ? Function to be Added below to Switch Login and Register page
+        l.bind("<Button-1>")
+        l.grid(row=6, column=0, columnspan=2)
+
+        f.pack()
 
     # * Register Page Screen
     @classmethod
