@@ -4,17 +4,17 @@ from PIL import Image, ImageTk
 
 class GUI:
 
-    __login_geometry = "500x290"
-    __register_geometry = "500x325"
-    __images = None
+    __login_geometry = [500,300]
+    __register_geometry = [500,335]
+    __images = []
 
     # * Function to Fetch Images
     # * No Parameters
     # * No Return Value
     @classmethod
     def init(cls):
-        import_tick_image = Image.open(r"..\Images\tick_image.png")
-        import_cross_image = Image.open(r"..\Images\cross_image.png")
+        import_tick_image = Image.open(r".\Images\tick_image.png")
+        import_cross_image = Image.open(r".\Images\cross_image.png")
         resized_tick_image = import_tick_image.resize(
             (40, 40), Image.LANCZOS)
         resized_cross_image = import_cross_image.resize(
@@ -26,7 +26,7 @@ class GUI:
     # * Parameters: root
     # * Return Value: ?
     @classmethod
-    def login(cls, root):
+    def login(cls, root, lgnToRegShifter):
 
         master_user_name = StringVar()
         master_password = StringVar()
@@ -37,7 +37,7 @@ class GUI:
             text="Sign In",
             font=('Kamerik 105 W00 Bold', 24),
             bg='#333333',
-            fg='white'
+            fg='#75E6DA'
         ).grid(
             row=0,
             column=0,
@@ -106,7 +106,6 @@ class GUI:
             row=4,
             column=0,
             columnspan=2,
-            #   padx=(0,30),
             pady=(20, 0)
         )
 
@@ -131,7 +130,7 @@ class GUI:
             fg='#75E6DA',
             cursor='hand2'
         )
-        l.bind("<Button-1>")
+        l.bind("<Button-1>",lgnToRegShifter)
         l.grid(row=6, column=0, columnspan=2)
 
         f.pack()
@@ -143,9 +142,9 @@ class GUI:
     def successfullMessage(cls, root, action):
 
         if (action == 'Login'):
-            pad = 145
+            pad = 50
         else:
-            pad = 125
+            pad = 20
 
         f = Frame(root, width=500, height=55, bg='#333333')
 
@@ -181,9 +180,9 @@ class GUI:
     def unsuccessfullMessage(cls, root, action):
 
         if action == 'Login':
-            pad = 150
+            pad = 45
         else:
-            pad = 120
+            pad = 20
 
         f2 = Frame(root, width=500, height=55, bg='#333333')
 
@@ -195,7 +194,7 @@ class GUI:
             row=0,
             column=0,
             padx=(pad, 10),
-            pady=(0, 5)
+            pady=(5, 0)
         )
         Label(
             f2,
@@ -206,16 +205,16 @@ class GUI:
         ).grid(
             row=0,
             column=1,
-            pady=(0, 5)
+            pady=(5, 0)
         )
 
-        f2.pack(side='bottom', anchor='center', fill='both')
+        f2.pack(side='bottom', anchor='s', fill='both')
 
     # * Register Page Screen
     # * Parameters: root
     # * Return Value: ?
     @classmethod
-    def register(cls, root):
+    def register(cls, root, regToLgnShifter):
         full_name = StringVar()
         master_user_name = StringVar()
         master_password = StringVar()
@@ -350,7 +349,7 @@ class GUI:
             cursor='hand2'
         )
         # ? Function to be Added below to Switch Login and Register page
-        l.bind("<Button-1>")
+        l.bind("<Button-1>",regToLgnShifter)
         l.grid(row=6, column=0, columnspan=2)
 
         f.pack()
