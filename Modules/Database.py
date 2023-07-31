@@ -8,7 +8,7 @@ class Database:
     # * No Parameters
     # * Return Value: Connection
     @classmethod
-    def sqliteConnection(cls):
+    def _sqliteConnection(cls):
         conn = sqlite3.connect('.database/database.db')
         return conn
 
@@ -19,7 +19,7 @@ class Database:
     def init(cls):
         if not os.path.exists('.database'):
             os.mkdir('.database')
-            conn = Database.sqliteConnection()
+            conn = Database._sqliteConnection()
             c = conn.cursor()
             c.execute('''
                         create table userTable (
@@ -36,7 +36,7 @@ class Database:
     # * No Return Value
     @classmethod
     def userInsertion(cls, first_name, master_user_name, hashed_password, unique_key):
-        conn = Database.sqliteConnection()
+        conn = Database._sqliteConnection()
         c = conn.cursor()
         c.execute(f'''
                     insert into userTable values ("{first_name}", "{master_user_name}", "{hashed_password}", "{unique_key}");
@@ -58,7 +58,7 @@ class Database:
     # * Parameters: Master Username, Platform, URL, Email, Username, Encrypted Password
     # * No Return Value
     def accountInsertion(cls, master_user_name, platform, url, email, user_name, encrypted_password):
-        conn = Database.sqliteConnection()
+        conn = Database._sqliteConnection()
         c = conn.cursor()
         c.execute(f'''
                     insert into {master_user_name} values ("{platform}", "{url}", "{email}", "{user_name}", "{encrypted_password}");
@@ -71,7 +71,7 @@ class Database:
     # * Return Value: Complete row of UserData -> List
     @classmethod
     def getUserInfo(cls, master_user_name):
-        conn = Database.sqliteConnection()
+        conn = Database._sqliteConnection()
         c = conn.cursor()
         data = list(c.execute(
             f'''select * from userTable where master_user_name="{master_user_name}"''').fetchall()[0])
@@ -84,7 +84,7 @@ class Database:
     # * Return Value: All Account List -> List
     @classmethod
     def getAccountTable(cls, master_user_name):
-        conn = Database.sqliteConnection()
+        conn = Database._sqliteConnection()
         c = conn.cursor()
         data = c.execute(f'''select * from {master_user_name}''').fetchall()
         conn.commit()
