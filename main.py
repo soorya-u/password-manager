@@ -2,7 +2,6 @@ from Modules.Cryptography import *
 from Modules.Database import *
 from Modules.GUI import *
 from Modules.Hashing import *
-import time
 
 
 Database.init()
@@ -21,26 +20,40 @@ def regToLgn(event):
     GUI.login(upper_frame, signInFunction, lgnToReg)
 
 def signUpFunction(first_name, master_user_name, master_password):
-    if not first_name=='' or not master_user_name=='' or not master_password=='' or master_user_name.count(' ')==0: 
-        hashed_password = Hashing.creatingHash(master_password)
-        Cryptography.generateKey()
-        unique_key = Cryptography.getKey()
-        Cryptography.destroyKey()
-        try:
-            Database.userInsertion(first_name, master_user_name, hashed_password, unique_key)
-            if len(lower_frame.winfo_children()):
-                lower_frame.winfo_children()[0].destroy()
-            GUI.successfullMessage(lower_frame, False)
-        except:
-            if len(lower_frame.winfo_children()):
-                lower_frame.winfo_children()[0].destroy()
-            GUI.unsuccessfullMessage(lower_frame, False)
+    hashed_password = Hashing.creatingHash(master_password)
+    Cryptography.generateKey()
+    unique_key = Cryptography.getKey().decode()
+    Cryptography.destroyKey()
 
+    try:
+        Database.userInsertion(first_name, master_user_name, hashed_password, unique_key)
+        if len(lower_frame.winfo_children()):
+            lower_frame.winfo_children()[0].destroy()
+        GUI.successfullMessage(lower_frame, False)
+        lower_frame.after(2000,lambda:lower_frame.winfo_children()[0].destroy())
+        lower_frame.after(2000,lambda:regToLgn(None))
+
+    except:
+        if len(lower_frame.winfo_children()):
+            lower_frame.winfo_children()[0].destroy()
+        GUI.unsuccessfullMessage(lower_frame, False)
 
 
 def signInFunction(master_user_name, master_password):
-    print(master_user_name)
-    print(master_password)
+    
+    try:
+        hashed_password = Hashing.creatingHash(master_password)
+        user_data = Database.getUserInfo(master_user_name)
+        if hashed_password==user_data[2]:
+            if len(lower_frame.winfo_children()):
+                lower_frame.winfo_children()[0].destroy()
+            GUI.successfullMessage(lower_frame)
+            lower_frame.after(2000,lambda:lower_frame.winfo_children()[0].destroy())
+
+    except:
+        if len(lower_frame.winfo_children()):
+            lower_frame.winfo_children()[0].destroy()
+        GUI.unsuccessfullMessage(lower_frame)
 
 root = Tk()
 GUI.init()
