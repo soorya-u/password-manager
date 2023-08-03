@@ -12,7 +12,7 @@ class GUI:
     # * No Parameters
     # * No Return Value
     @classmethod
-    def init(cls):
+    def lgnRegInit(cls):
         import_tick_image = Image.open(r".\Images\tick_image.png")
         import_cross_image = Image.open(r".\Images\cross_image.png")
         resized_tick_image = import_tick_image.resize(

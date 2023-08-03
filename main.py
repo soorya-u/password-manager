@@ -10,12 +10,12 @@ loginGeo = GUI._GUI__login_geometry
 regGeo = GUI._GUI__register_geometry
 
 def lgnToReg(event):
-    root.geometry(f'{regGeo[0]}x{regGeo[1]}')
+    lrWindow.geometry(f'{regGeo[0]}x{regGeo[1]}')
     upper_frame.winfo_children()[0].destroy()
     GUI.register(upper_frame,signUpFunction, regToLgn)
  
 def regToLgn(event):
-    root.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
+    lrWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
     upper_frame.winfo_children()[0].destroy()
     GUI.login(upper_frame, signInFunction, lgnToReg)
 
@@ -48,25 +48,25 @@ def signInFunction(master_user_name, master_password):
             if len(lower_frame.winfo_children()):
                 lower_frame.winfo_children()[0].destroy()
             GUI.successfullMessage(lower_frame)
-            lower_frame.after(2000,lambda:lower_frame.winfo_children()[0].destroy())
+            lower_frame.after(2000,lambda:lrWindow.destroy())
 
     except:
         if len(lower_frame.winfo_children()):
             lower_frame.winfo_children()[0].destroy()
         GUI.unsuccessfullMessage(lower_frame)
 
-root = Tk()
-GUI.init()
-root.title("Password Manager")
-root.config(background='#333333')
-root.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
+lrWindow = Tk()
+GUI.lgnRegInit()
+lrWindow.title("Password Manager")
+lrWindow.config(background='#333333')
+lrWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
 
-upper_frame = Frame(root,bg='#333333')
-lower_frame = Frame(root,bg='#333333')
+upper_frame = Frame(lrWindow,bg='#333333')
+lower_frame = Frame(lrWindow,bg='#333333')
 
 GUI.login(upper_frame, signInFunction, lgnToReg)
 
 upper_frame.pack()
 lower_frame.pack()
 
-root.mainloop()
+lrWindow.mainloop()
