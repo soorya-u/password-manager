@@ -23,8 +23,8 @@ class GUI:
         cls.__images.append(ImageTk.PhotoImage(resized_cross_image))
 
     # * Login Page Screen
-    # * Parameters: root
-    # * Return Value: ?
+    # * Parameters: root, SignIn Function and Login to Register Function
+    # * No Return Value
     @classmethod
     def login(cls, root, signInFunction, lgnToRegShifter):
 
@@ -137,7 +137,7 @@ class GUI:
         f.pack()
 
     # * Function to Display Login Successfull
-    # * Parameters: root and Login/Registration -> String
+    # * Parameters: root and Login/Registration -> Boolean
     # * No Return Value
     @classmethod
     def successfullMessage(cls, root, loginBoolean=True):
@@ -174,7 +174,7 @@ class GUI:
         f.pack(side='bottom', anchor='center', fill='both')
 
     # * Function to Display Login Unsuccessfull
-    # * Parameters: root
+    # * Parameters: root and Login/Registration -> Boolean
     # * No Return Value
     @classmethod
     def unsuccessfullMessage(cls, root, loginBoolean=True):
@@ -210,8 +210,8 @@ class GUI:
         f2.pack(side='bottom', anchor='s', fill='both')
 
     # * Register Page Screen
-    # * Parameters: root
-    # * Return Value: ?
+    # * Parameters: root, SignUp Function and Register to Login Function
+    # * No Return Value
     @classmethod
     def register(cls, root, signUpFunction, regToLgnShifter):
         first_name = StringVar()
@@ -305,7 +305,7 @@ class GUI:
             column=1
         )
 
-        Button(
+        b = Button(
             f,
             width=7,
             height=1,
@@ -353,7 +353,7 @@ class GUI:
 
         f.pack()
 
-    # * Register Page Screen
+    # * Account Form Screen
     @classmethod
     def accountForm():
         pass
