@@ -4,7 +4,7 @@
 
 **Scope**: The scope of this project involves implementing encryption algorithms to secure password storage, designing a user interface to input and retrieve passwords, and developing functions to generate strong passwords and store/retrieve them from a database.
 
-**Concepts Used**: The Concepts of Hashing and Encryption has been used along with the implimentation of a Simple Database and a Graphical User Interface. The Detailed Description of the Project has been given below.
+**Concepts Used**: The Concepts of *Hashing* and *Encryption* has been used along with the implementation of a *Basic Database* and a *Graphical User Interface*. The Detailed Description of the Project has been given below.
 
 ---
 
@@ -26,7 +26,9 @@
 
 `hashlib` implements a common interface to many different secure hash and message digest algorithms. It is used to hash the Password of our Application and use it for Verification.
 
+## Regular Expression
 
+`re`  provides regular expression matching operations. It is used to set Rules for Username and Password.
 
 ---
 
@@ -38,3 +40,4 @@ The Following links are the Documentations of the Libraries used in this Project
 - [*sqlite3*](https://docs.python.org/3/library/sqlite3.html)
 - [*Tkinter*](https://docs.python.org/3/library/tkinter.html)
 - [*hashlib*](https://docs.python.org/3/library/hashlib.html#)
+- [*re*](https://docs.python.org/3/library/re.html)
