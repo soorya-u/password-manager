@@ -7,21 +7,19 @@ from Modules.Regex import *
 
 Database.init()
 
-loginGeo = GUI._GUI__login_geometry
-regGeo = GUI._GUI__register_geometry
-
+loginGeo = GUI.login_geometry
+regGeo = GUI.register_geometry
+frmGeo = GUI.form_geometry
 
 def lgnToReg(event):
-    lrWindow.geometry(f'{regGeo[0]}x{regGeo[1]}')
+    lgnRegWindow.geometry(f'{regGeo[0]}x{regGeo[1]}')
     upper_frame.winfo_children()[0].destroy()
     GUI.register(upper_frame, signUpFunction, regToLgn)
 
-
 def regToLgn(event):
-    lrWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
+    lgnRegWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
     upper_frame.winfo_children()[0].destroy()
     GUI.login(upper_frame, signInFunction, lgnToReg)
-
 
 def signUpFunction(first_name, master_user_name, master_password):
 
@@ -46,7 +44,6 @@ def signUpFunction(first_name, master_user_name, master_password):
                 lower_frame.winfo_children()[0].destroy()
             GUI.unsuccessfullMessage(lower_frame, False)
 
-
 def signInFunction(master_user_name, master_password):
 
     try:
@@ -55,30 +52,53 @@ def signInFunction(master_user_name, master_password):
             if len(lower_frame.winfo_children()):
                 lower_frame.winfo_children()[0].destroy()
             GUI.successfullMessage(lower_frame)
-            lower_frame.after(2000, lambda: lrWindow.destroy())
+            lower_frame.after(1000, lambda: GUI._GUI__images.clear())
+            lower_frame.after(2000, lambda: lgnRegWindow.destroy())
 
     except:
         if len(lower_frame.winfo_children()):
             lower_frame.winfo_children()[0].destroy()
         GUI.unsuccessfullMessage(lower_frame)
 
+def loginAndRegister():
 
-def loginRegister():
-
-    global lrWindow
-    lrWindow = Tk()
+    global lgnRegWindow
+    lgnRegWindow = Tk()
     GUI.lgnRegInit()
-    lrWindow.title("Password Manager")
-    lrWindow.config(background='#333333')
-    lrWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
+    lgnRegWindow.title("Password Manager")
+    lgnRegWindow.config(background='#333333')
+    lgnRegWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
 
     global upper_frame, lower_frame
-    upper_frame = Frame(lrWindow, bg='#333333')
-    lower_frame = Frame(lrWindow, bg='#333333')
+    upper_frame = Frame(lgnRegWindow, bg='#333333')
+    lower_frame = Frame(lgnRegWindow, bg='#333333')
 
     GUI.login(upper_frame, signInFunction, lgnToReg)
 
     upper_frame.pack()
     lower_frame.pack()
 
-    lrWindow.mainloop()
+    lgnRegWindow.mainloop()
+
+def formAndList():
+
+    global frmLstWindow
+    frmLstWindow = Tk()
+    GUI.frmLstInit()
+    frmLstWindow.title("Password Manager")
+    frmLstWindow.config(background='#333333')
+    frmLstWindow.geometry(f'{frmGeo[0]}x{frmGeo[1]}')
+
+    global main_frame
+    main_frame = Frame(frmLstWindow, bg='#333333')
+
+    GUI.accountForm()
+
+    main_frame.pack()
+
+    frmLstWindow.mainloop()
+
+
+loginAndRegister()
+
+formAndList()

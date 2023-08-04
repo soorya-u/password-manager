@@ -4,11 +4,19 @@ from PIL import Image, ImageTk
 
 class GUI:
 
-    __login_geometry = [500, 300]
-    __register_geometry = [500, 335]
+    login_geometry = [500, 300]
+    register_geometry = [500, 335]
+    form_geometry = [650, 400]
     __images = []
 
-    # * Function to Fetch Images
+    # * Function to Fetch Images for Account Form and Account List
+    # * No Parameters
+    # * No Return Value
+    @classmethod
+    def frmLstInit(cls):
+        pass
+
+    # * Function to Fetch Images for Login and Register
     # * No Parameters
     # * No Return Value
     @classmethod
@@ -355,15 +363,15 @@ class GUI:
 
     # * Account Form Screen
     @classmethod
-    def accountForm():
+    def accountForm(cls):
         pass
 
     # * Account Added to Database Message
     @classmethod
-    def accountAddedMessage():
+    def accountAddedMessage(cls):
         pass
 
     # * All Accounts List Sub Screen
     @classmethod
-    def subWindow():
+    def subWindow(cls):
         pass
