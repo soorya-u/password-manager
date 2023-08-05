@@ -6,14 +6,16 @@ class Regex:
     # * Parameters: Master USer Name
     # * Return Value: Boolean
     @classmethod
-    def verifyMasterUserName(cls,master_user_name):
-        return bool(re.match('^[A-Za-z0-9._]+$', master_user_name))
+    def verifyMasterUserName(cls, master_user_name):
+        pattern = '^[A-Za-z0-9._]+$'
+        return bool(re.match(pattern, master_user_name))
     
     # * Function to verify Master Password
     # * Parameters: Master Password
     # * Return Value: Boolean
     @classmethod
-    def verifyPassword(cls,master_password):
-        if len(master_password) >= 8 and len(master_password) <= 35:
-            return True
-        return False
+    def verifyPassword(cls, master_password):
+        spec_char = r'''!@$%^&*()_+-={}[]|\:;"'?/><,.~`#'''
+        pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*["+spec_char+"])[A-Za-z\d"+spec_char+"]{8,35}$"
+        return bool(re.match(pattern, master_password))
+    
