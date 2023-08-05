@@ -67,7 +67,7 @@ class Database:
         conn.close()
 
     # * Function to get User Passowrd
-    # * Parameters: Master Useranme
+    # * Parameters: Master Username
     # * Return Value: Hashed Password -> String
     @classmethod
     def getUserHashedPassword(cls, master_user_name):
@@ -78,9 +78,9 @@ class Database:
         conn.commit()
         conn.close()
         return data.pop()
-
+    
     # * Function to get User Key
-    # * Parameters: Master Useranme
+    # * Parameters: Master Username
     # * Return Value: Unique Key -> String
     @classmethod
     def getUserUniqueKey(cls, master_user_name):
@@ -88,6 +88,19 @@ class Database:
         c = conn.cursor()
         data = list(c.execute(
             f'''select unique_key from userTable where master_user_name="{master_user_name}"''').fetchall()[0])
+        conn.commit()
+        conn.close()
+        return data.pop()
+    
+    # * Function to get User First Name
+    # * Parameters: Master Username
+    # * Return Value: First Name -> String
+    @classmethod
+    def getUserFirstName(cls, master_user_name):
+        conn = Database._sqliteConnection()
+        c = conn.cursor()
+        data = list(c.execute(
+            f'''select first_name from userTable where master_user_name="{master_user_name}"''').fetchall()[0])
         conn.commit()
         conn.close()
         return data.pop()
