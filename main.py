@@ -7,9 +7,9 @@ from Modules.Regex import *
 
 Database.init()
 
-loginGeo = GUI._GUI__login_geometry
-regGeo = GUI._GUI__register_geometry
-frmGeo = GUI._GUI__form_geometry
+loginGeo = GUI.login_geometry
+regGeo = GUI.register_geometry
+frmGeo = GUI.form_geometry
 
 def lgnToReg(event):
     lgnRegWindow.geometry(f'{regGeo[0]}x{regGeo[1]}')
@@ -103,6 +103,6 @@ def formAndList():
     frmLstWindow.mainloop()
 
 
-loginAndRegister()
+# loginAndRegister()
 
 formAndList()
