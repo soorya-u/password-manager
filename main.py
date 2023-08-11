@@ -7,6 +7,8 @@ from Modules.Regex import *
 
 Database.init()
 
+userData=[]
+
 loginGeo = GUI.login_geometry
 regGeo = GUI.register_geometry
 frmGeo = GUI.form_geometry
@@ -51,12 +53,11 @@ def signInFunction(master_user_name, master_password):
         if Hashing.verifyingHash(master_password, stored_password_hash):
             if len(lower_frame.winfo_children()):
                 lower_frame.winfo_children()[0].destroy()
-            global userData
             first_name = Database.getUserFirstName()
             userData.append(master_user_name)
             userData.append(first_name)
             GUI.successfullMessage(lower_frame)
-            lower_frame.after(1000, lambda: GUI._GUI__images.clear())
+            lower_frame.after(1000, lambda: GUI.clearImg())
             lower_frame.after(2000, lambda: lgnRegWindow.destroy())
 
     except:
@@ -103,6 +104,6 @@ def formAndList():
     frmLstWindow.mainloop()
 
 
-# loginAndRegister()
+loginAndRegister()
 
 formAndList()

@@ -9,6 +9,13 @@ class GUI:
     form_geometry = [650, 400]
     __images = []
 
+    # * Function to Clear Images
+    # * No Parameters
+    # * No Return Value
+    @classmethod
+    def clearImg(cls):
+        cls.__images.clear()
+
     # * Function to Fetch Images for Account Form and Account List
     # * No Parameters
     # * No Return Value
