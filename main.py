@@ -4,8 +4,9 @@ from Modules.GUI import *
 from Modules.Hashing import *
 from Modules.Regex import *
 
-
 Database.init()
+
+userData = ['soorya_u', 'Soorya']
 
 loginGeo = GUI.login_geometry
 regGeo = GUI.register_geometry
@@ -51,7 +52,6 @@ def signInFunction(master_user_name, master_password):
         if Hashing.verifyingHash(master_password, stored_password_hash):
             if len(lower_frame.winfo_children()):
                 lower_frame.winfo_children()[0].destroy()
-            global userData
             first_name = Database.getUserFirstName()
             userData.append(master_user_name)
             userData.append(first_name)
@@ -93,12 +93,13 @@ def formAndList():
     frmLstWindow.config(background='#333333')
     frmLstWindow.geometry(f'{frmGeo[0]}x{frmGeo[1]}')
 
-    global main_frame
-    main_frame = Frame(frmLstWindow, bg='#333333')
+    upper_frame = Frame(frmLstWindow, bg='#333333')
+    lower_frame = Frame(frmLstWindow, bg='#333333')
 
-    GUI.accountForm()
+    GUI.accountForm(upper_frame, userData[1])
 
-    main_frame.pack()
+    upper_frame.pack()
+    lower_frame.pack()
 
     frmLstWindow.mainloop()
 

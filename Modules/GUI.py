@@ -2,6 +2,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 from enum import Enum
 
+
 class Action(Enum):
     LogIn = 1
     Register = 2
@@ -27,7 +28,14 @@ class GUI:
     # * No Return Value
     @classmethod
     def frmLstInit(cls):
-        pass
+        import_tick_image = Image.open(r".\Images\tick_image.png")
+        import_cross_image = Image.open(r".\Images\cross_image.png")
+        resized_tick_image = import_tick_image.resize(
+            (40, 40), Image.LANCZOS)
+        resized_cross_image = import_cross_image.resize(
+            (25, 25), Image.LANCZOS)
+        cls.__images.append(ImageTk.PhotoImage(resized_tick_image))
+        cls.__images.append(ImageTk.PhotoImage(resized_cross_image))
 
     # * Function to Fetch Images for Login and Register
     # * No Parameters
@@ -158,7 +166,7 @@ class GUI:
         f.pack()
 
     # * Function to Display Login Successfull
-    # * Parameters: root and Login/Registration -> Boolean
+    # * Parameters: root and Action Value -> Enum
     # * No Return Value
     @classmethod
     def successfullMessage(cls, root, actionValue):
@@ -197,7 +205,7 @@ class GUI:
         f.pack(side='bottom', anchor='center', fill='both')
 
     # * Function to Display Login Unsuccessfull
-    # * Parameters: root and Login/Registration -> Boolean
+    # * Parameters: root and Action Value -> Enum
     # * No Return Value
     @classmethod
     def unsuccessfullMessage(cls, root, actionValue):
@@ -209,12 +217,10 @@ class GUI:
         elif actionValue == Action.Account:
             message = 'Account Information cannot be Added'
 
-
-
-        f2 = Frame(root, width=500, height=55, bg='#333333')
+        f = Frame(root, width=500, height=55, bg='#333333')
 
         Label(
-            f2,
+            f,
             image=cls.__images[1],
             bg='#333333'
         ).grid(
@@ -223,7 +229,7 @@ class GUI:
             pady=(5, 0)
         )
         Label(
-            f2,
+            f,
             text=message,
             fg="#de151f",
             bg="#333333",
@@ -234,7 +240,7 @@ class GUI:
             pady=(5, 0)
         )
 
-        f2.pack(side='bottom', anchor='s', fill='both')
+        f.pack(side='bottom', anchor='s', fill='both')
 
     # * Register Page Screen
     # * Parameters: root, SignUp Function and Register to Login Function
@@ -253,11 +259,12 @@ class GUI:
             font=('Kamerik 105 W00 Bold', 24),
             bg='#333333',
             fg='#75E6DA'
-        ).grid(row=0,
-               column=0,
-               columnspan=2,
-               pady=(15, 0)
-               )
+        ).grid(
+            row=0,
+            column=0,
+            columnspan=2,
+            pady=(15, 0)
+        )
 
         Label(
             f,
@@ -381,10 +388,42 @@ class GUI:
         f.pack()
 
     # * Account Form Screen
+    # * Parameters: root, First Name -> String
+    # * No Return Value
     @classmethod
-    def accountForm(cls, root):
-        
-        f = Frame(root, width=650, height=400, bg='#333333')
+    def accountForm(cls, root, firstName):
+
+        welcomeMsg = Frame(root, width=650, height=55, bg='#333333')
+
+        Label(
+            welcomeMsg,
+            text="Hello, ",
+            font=('Kamerik 105 W00 Bold', 16),
+            bg='#333333',
+            fg='white',
+        ).grid(
+            row=0,
+            column=0,
+            pady=(5, 0),
+            padx=(5, 0)
+        )
+
+        Label(
+            welcomeMsg,
+            text=firstName,
+            font=('Kamerik 105 W00 Bold', 16),
+            bg='#333333',
+            fg='#75E6DA',
+        ).grid(
+            row=0,
+            column=1,
+            pady=(3, 0)
+        )
+
+        welcomeMsg.pack(anchor='w', fill='x')
+        f = Frame(root, width=650, height=305, bg='#333333')
+
+        f.pack(anchor='center')
 
     # * Account Added to Database Message
     @classmethod
