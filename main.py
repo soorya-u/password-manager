@@ -7,8 +7,6 @@ from Modules.Regex import *
 
 Database.init()
 
-userData=[]
-
 loginGeo = GUI.login_geometry
 regGeo = GUI.register_geometry
 frmGeo = GUI.form_geometry
@@ -36,7 +34,7 @@ def signUpFunction(first_name, master_user_name, master_password):
                 first_name, master_user_name, hashed_password, unique_key)
             if len(lower_frame.winfo_children()):
                 lower_frame.winfo_children()[0].destroy()
-            GUI.successfullMessage(lower_frame, False)
+            GUI.successfullMessage(lower_frame, Action.Register)
             lower_frame.after(
                 2000, lambda: lower_frame.winfo_children()[0].destroy())
             lower_frame.after(2000, lambda: regToLgn(None))
@@ -44,7 +42,7 @@ def signUpFunction(first_name, master_user_name, master_password):
         except:
             if len(lower_frame.winfo_children()):
                 lower_frame.winfo_children()[0].destroy()
-            GUI.unsuccessfullMessage(lower_frame, False)
+            GUI.unsuccessfullMessage(lower_frame, Action.Register)
 
 def signInFunction(master_user_name, master_password):
 
@@ -53,17 +51,18 @@ def signInFunction(master_user_name, master_password):
         if Hashing.verifyingHash(master_password, stored_password_hash):
             if len(lower_frame.winfo_children()):
                 lower_frame.winfo_children()[0].destroy()
+            global userData
             first_name = Database.getUserFirstName()
             userData.append(master_user_name)
             userData.append(first_name)
-            GUI.successfullMessage(lower_frame)
+            GUI.successfullMessage(lower_frame, Action.LogIn)
             lower_frame.after(1000, lambda: GUI.clearImg())
             lower_frame.after(2000, lambda: lgnRegWindow.destroy())
 
     except:
         if len(lower_frame.winfo_children()):
             lower_frame.winfo_children()[0].destroy()
-        GUI.unsuccessfullMessage(lower_frame)
+        GUI.unsuccessfullMessage(lower_frame, Action.LogIn)
 
 def loginAndRegister():
 

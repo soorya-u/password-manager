@@ -1,5 +1,11 @@
 from tkinter import *
 from PIL import Image, ImageTk
+from enum import Enum
+
+class Action(Enum):
+    LogIn = 1
+    Register = 2
+    Account = 3
 
 
 class GUI:
@@ -155,12 +161,14 @@ class GUI:
     # * Parameters: root and Login/Registration -> Boolean
     # * No Return Value
     @classmethod
-    def successfullMessage(cls, root, loginBoolean=True):
+    def successfullMessage(cls, root, actionValue):
 
-        if (loginBoolean == True):
-            action = 'Login'
-        else:
-            action = 'Registration'
+        if actionValue == Action.LogIn:
+            message = 'Login Unsuccessfull'
+        elif actionValue == Action.Register:
+            message = 'Registration Unsuccessfull'
+        elif actionValue == Action.Account:
+            message = 'Account Information cannot be Added'
 
         f = Frame(root, width=500, height=55, bg='#333333')
 
@@ -176,7 +184,7 @@ class GUI:
 
         Label(
             f,
-            text=f"{action} Successfull",
+            text=message,
             fg="#59d400",
             bg="#333333",
             font=('Kamerik 105 W00 Bold', 12),
@@ -192,12 +200,16 @@ class GUI:
     # * Parameters: root and Login/Registration -> Boolean
     # * No Return Value
     @classmethod
-    def unsuccessfullMessage(cls, root, loginBoolean=True):
+    def unsuccessfullMessage(cls, root, actionValue):
 
-        if (loginBoolean == True):
-            action = 'Login'
-        else:
-            action = 'Registration'
+        if actionValue == Action.LogIn:
+            message = 'Login Unsuccessfull'
+        elif actionValue == Action.Register:
+            message = 'Registration Unsuccessfull'
+        elif actionValue == Action.Account:
+            message = 'Account Information cannot be Added'
+
+
 
         f2 = Frame(root, width=500, height=55, bg='#333333')
 
@@ -212,7 +224,7 @@ class GUI:
         )
         Label(
             f2,
-            text=f"{action} Unsuccessfull",
+            text=message,
             fg="#de151f",
             bg="#333333",
             font=('Kamerik 105 W00 Bold', 12),
@@ -370,8 +382,9 @@ class GUI:
 
     # * Account Form Screen
     @classmethod
-    def accountForm(cls):
-        pass
+    def accountForm(cls, root):
+        
+        f = Frame(root, width=650, height=400, bg='#333333')
 
     # * Account Added to Database Message
     @classmethod
