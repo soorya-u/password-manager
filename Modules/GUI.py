@@ -446,7 +446,7 @@ class GUI:
             fg='white',
             cursor='hand2'
         )
-        l.grid(row=0, column=2, pady=(2, 0), padx=(325,0), sticky=E)
+        l.grid(row=0, column=2, pady=(2, 0), padx=(325, 0), sticky=E)
         l.bind("<Button-1>", lambda: GUI.subWindow())
 
         f.pack(anchor='w', fill='x')
@@ -456,7 +456,7 @@ class GUI:
     # * No Return Value
 
     @classmethod
-    def accountForm(cls, root: Frame, addAccount):
+    def accountForm(cls, root: Frame, addAccount, getGeneratedPassword):
 
         platform = StringVar()
         url = StringVar()
@@ -492,19 +492,15 @@ class GUI:
             sticky=E
         )
 
-        Entry(
+        e_platform = Entry(
             f,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
             textvariable=platform,
-        ).grid(
-            row=1,
-            column=1,
-            pady=(25, 10),
-            sticky=W
         )
+        e_platform.grid(row=1, column=1, pady=(25, 10), sticky=W)
 
         Label(
             f,
@@ -519,19 +515,15 @@ class GUI:
             sticky=E
         )
 
-        Entry(
+        e_url = Entry(
             f,
             textvariable=url,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
-        ).grid(
-            row=2,
-            column=1,
-            pady=(0, 10),
-            sticky=W
         )
+        e_url.grid(row=2, column=1, pady=(0, 10), sticky=W)
 
         Label(
             f,
@@ -546,19 +538,15 @@ class GUI:
             sticky=E
         )
 
-        Entry(
+        e_email = Entry(
             f,
             textvariable=email,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
-        ).grid(
-            row=3,
-            column=1,
-            pady=(0, 10),
-            sticky=W
         )
+        e_email.grid(row=3, column=1, pady=(0, 10), sticky=W)
 
         Label(
             f,
@@ -573,19 +561,15 @@ class GUI:
             sticky=E
         )
 
-        Entry(
+        e_user_name = Entry(
             f,
             textvariable=user_name,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
-        ).grid(
-            row=4,
-            column=1,
-            pady=(0, 10),
-            sticky=W
         )
+        e_user_name.grid(row=4, column=1, pady=(0, 10), sticky=W)
 
         Label(
             f,
@@ -599,18 +583,15 @@ class GUI:
             sticky=E
         )
 
-        Entry(
+        e_password = Entry(
             f,
             textvariable=password,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
-        ).grid(
-            row=5,
-            column=1,
-            sticky=W
         )
+        e_password.grid(row=5, column=1, sticky=W)
 
         l = Label(
             f,
@@ -622,7 +603,8 @@ class GUI:
             fg='white',
             cursor='hand2'
         )
-        l.bind("<Button-1>", lambda: 0+0)
+        l.bind("<Button-1>",
+               lambda e: [e_password.delete(0, END), e_password.insert(0, getGeneratedPassword())])
         l.grid(row=6, column=0, columnspan=2, sticky=E)
 
         Button(
@@ -631,8 +613,13 @@ class GUI:
             height=1,
             relief=SOLID,
             borderwidth=2,
-            command=lambda: addAccount(
-                platform.get(), url.get(), email.get(), user_name.get(), password.get()),
+            command=lambda: [
+                addAccount(platform.get(), url.get(), email.get(),
+                           user_name.get(), password.get()),
+                e_platform.delete(0, END), e_url.delete(
+                    0, END), e_email.delete(0, END),
+                e_user_name.delete(0, END), e_password.delete(0, END)
+            ],
             text="Add Account",
             font=('Kamerik 105 W00 Bold', 10),
             bg='#454545',

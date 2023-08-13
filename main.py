@@ -6,7 +6,8 @@ from Modules.Regex import *
 
 Database.init()
 
-userData = ['soorya_u', 'Soorya']
+userData = []
+exit_code = -1
 
 loginGeo = GUI.login_geometry
 regGeo = GUI.register_geometry
@@ -38,7 +39,7 @@ def signUpFunction(first_name: str, master_user_name: str, master_password: str)
             GUI.successfullMessage(footer_frame, Action.Register)
             footer_frame.after(
                 2000, lambda: footer_frame.winfo_children()[0].destroy())
-            footer_frame.after(2000, lambda: regToLgn(None))
+            footer_frame.after(1000, lambda: regToLgn(None))
 
         except:
             if len(footer_frame.winfo_children()):
@@ -57,7 +58,9 @@ def signInFunction(master_user_name: str, master_password: str) -> None:
             userData.append(first_name)
             GUI.successfullMessage(footer_frame, Action.LogIn)
             footer_frame.after(1000, lambda: GUI.clearImg())
-            footer_frame.after(2000, lambda: lgnRegWindow.destroy())
+            footer_frame.after(1000, lambda: lgnRegWindow.destroy())
+            global exit_code
+            exit_code = 1
 
     except:
         if len(footer_frame.winfo_children()):
@@ -95,12 +98,13 @@ def formAndList() -> None:
 
     global header_frame
     header_frame = Frame(frmLstWindow, bg='#333333')
+    global main_frame
     main_frame = Frame(frmLstWindow, bg='#333333')
+    global footer_frame
     footer_frame = Frame(frmLstWindow, bg='#333333')
 
     GUI.welcomeMsg(header_frame, userData[1])
-    GUI.accountForm(main_frame, addAccount)
-    GUI.successfullMessage(footer_frame, Action.Account)
+    GUI.accountForm(main_frame, addAccount, getGeneratedPassword)
 
     header_frame.pack()
     main_frame.pack()
@@ -118,11 +122,17 @@ def addAccount(platform, url, email, user_name, password):
         if len(footer_frame.winfo_children()):
                 footer_frame.winfo_children()[0].destroy()
         GUI.successfullMessage(footer_frame, Action.Account)
+        footer_frame.after(2000, lambda: footer_frame.winfo_children()[0].destroy())
     except:
         if len(footer_frame.winfo_children()):
             footer_frame.winfo_children()[0].destroy()
         GUI.unsuccessfullMessage(footer_frame, Action.Account)
+        footer_frame.after(2000, lambda: footer_frame.winfo_children()[0].destroy())
+
+def getGeneratedPassword():
+    pass
     
 loginAndRegister()
 
-formAndList()
+if(exit_code==1):
+    formAndList()
