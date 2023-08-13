@@ -425,11 +425,6 @@ class GUI:
 
         f.pack(anchor='center')
 
-    # * Account Added to Database Message
-    @classmethod
-    def accountAddedMessage(cls):
-        pass
-
     # * All Accounts List Sub Screen
     @classmethod
     def subWindow(cls):

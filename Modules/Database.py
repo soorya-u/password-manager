@@ -9,7 +9,7 @@ class Database:
     # * Return Value: Connection
     @classmethod
     def _sqliteConnection(cls):
-        conn = sqlite3.connect('.database/database.db')
+        conn = sqlite3.connect(r'.database/database.db')
         return conn
 
     # * Function to Create userTable
