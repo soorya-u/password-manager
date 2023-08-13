@@ -59,6 +59,7 @@
 - [x] Establishing Database Connection
 - [x] Insertion of User Data
 - [x] Insertion of Account Details
+- [ ] Adding Characteristics to Table Datas
 - [x] Read User Hashed Password
 - [x] Read User Unique Key
 - [x] Read User First Name
