@@ -14,13 +14,13 @@ frmGeo = GUI.form_geometry
 
 def lgnToReg(event):
     lgnRegWindow.geometry(f'{regGeo[0]}x{regGeo[1]}')
-    upper_frame.winfo_children()[0].destroy()
-    GUI.register(upper_frame, signUpFunction, regToLgn)
+    main_frame.winfo_children()[0].destroy()
+    GUI.register(main_frame, signUpFunction, regToLgn)
 
 def regToLgn(event):
     lgnRegWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
-    upper_frame.winfo_children()[0].destroy()
-    GUI.login(upper_frame, signInFunction, lgnToReg)
+    main_frame.winfo_children()[0].destroy()
+    GUI.login(main_frame, signInFunction, lgnToReg)
 
 def signUpFunction(first_name, master_user_name, master_password):
 
@@ -33,36 +33,36 @@ def signUpFunction(first_name, master_user_name, master_password):
         try:
             Database.userInsertion(
                 first_name, master_user_name, hashed_password, unique_key)
-            if len(lower_frame.winfo_children()):
-                lower_frame.winfo_children()[0].destroy()
-            GUI.successfullMessage(lower_frame, Action.Register)
-            lower_frame.after(
-                2000, lambda: lower_frame.winfo_children()[0].destroy())
-            lower_frame.after(2000, lambda: regToLgn(None))
+            if len(footer_frame.winfo_children()):
+                footer_frame.winfo_children()[0].destroy()
+            GUI.successfullMessage(footer_frame, Action.Register)
+            footer_frame.after(
+                2000, lambda: footer_frame.winfo_children()[0].destroy())
+            footer_frame.after(2000, lambda: regToLgn(None))
 
         except:
-            if len(lower_frame.winfo_children()):
-                lower_frame.winfo_children()[0].destroy()
-            GUI.unsuccessfullMessage(lower_frame, Action.Register)
+            if len(footer_frame.winfo_children()):
+                footer_frame.winfo_children()[0].destroy()
+            GUI.unsuccessfullMessage(footer_frame, Action.Register)
 
 def signInFunction(master_user_name, master_password):
 
     try:
         stored_password_hash = Database.getUserHashedPassword(master_user_name)
         if Hashing.verifyingHash(master_password, stored_password_hash):
-            if len(lower_frame.winfo_children()):
-                lower_frame.winfo_children()[0].destroy()
+            if len(footer_frame.winfo_children()):
+                footer_frame.winfo_children()[0].destroy()
             first_name = Database.getUserFirstName()
             userData.append(master_user_name)
             userData.append(first_name)
-            GUI.successfullMessage(lower_frame, Action.LogIn)
-            lower_frame.after(1000, lambda: GUI.clearImg())
-            lower_frame.after(2000, lambda: lgnRegWindow.destroy())
+            GUI.successfullMessage(footer_frame, Action.LogIn)
+            footer_frame.after(1000, lambda: GUI.clearImg())
+            footer_frame.after(2000, lambda: lgnRegWindow.destroy())
 
     except:
-        if len(lower_frame.winfo_children()):
-            lower_frame.winfo_children()[0].destroy()
-        GUI.unsuccessfullMessage(lower_frame, Action.LogIn)
+        if len(footer_frame.winfo_children()):
+            footer_frame.winfo_children()[0].destroy()
+        GUI.unsuccessfullMessage(footer_frame, Action.LogIn)
 
 def loginAndRegister():
 
@@ -73,14 +73,14 @@ def loginAndRegister():
     lgnRegWindow.config(background='#333333')
     lgnRegWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
 
-    global upper_frame, lower_frame
-    upper_frame = Frame(lgnRegWindow, bg='#333333')
-    lower_frame = Frame(lgnRegWindow, bg='#333333')
+    global main_frame, footer_frame
+    main_frame = Frame(lgnRegWindow, bg='#333333')
+    footer_frame = Frame(lgnRegWindow, bg='#333333')
 
-    GUI.login(upper_frame, signInFunction, lgnToReg)
+    GUI.login(main_frame, signInFunction, lgnToReg)
 
-    upper_frame.pack()
-    lower_frame.pack()
+    main_frame.pack()
+    footer_frame.pack()
 
     lgnRegWindow.mainloop()
 
@@ -93,17 +93,21 @@ def formAndList():
     frmLstWindow.config(background='#333333')
     frmLstWindow.geometry(f'{frmGeo[0]}x{frmGeo[1]}')
 
-    upper_frame = Frame(frmLstWindow, bg='#333333')
-    lower_frame = Frame(frmLstWindow, bg='#333333')
+    global header_frame
+    header_frame = Frame(frmLstWindow, bg='#333333')
+    main_frame = Frame(frmLstWindow, bg='#333333')
+    footer_frame = Frame(frmLstWindow, bg='#333333')
 
-    GUI.accountForm(upper_frame, userData[1])
+    GUI.welcomeMsg(header_frame, userData[1])
+    GUI.accountForm(main_frame)
+    GUI.successfullMessage(footer_frame, Action.Account)
 
-    upper_frame.pack()
-    lower_frame.pack()
+    header_frame.pack(fill=X,anchor=W,side=TOP)
+    main_frame.pack()
+    footer_frame.pack()
 
     frmLstWindow.mainloop()
-
-
+    
 loginAndRegister()
 
 formAndList()

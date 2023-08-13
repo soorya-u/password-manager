@@ -30,12 +30,16 @@ class GUI:
     def frmLstInit(cls):
         import_tick_image = Image.open(r".\Images\tick_image.png")
         import_cross_image = Image.open(r".\Images\cross_image.png")
+        import_generate_password_image = Image.open(r".\Images\generate_password.png")
         resized_tick_image = import_tick_image.resize(
             (40, 40), Image.LANCZOS)
         resized_cross_image = import_cross_image.resize(
             (25, 25), Image.LANCZOS)
+        resized_generate_password_image = import_generate_password_image.resize(
+            (40, 40), Image.LANCZOS)
         cls.__images.append(ImageTk.PhotoImage(resized_tick_image))
         cls.__images.append(ImageTk.PhotoImage(resized_cross_image))
+        cls.__images.append(ImageTk.PhotoImage(resized_generate_password_image))
 
     # * Function to Fetch Images for Login and Register
     # * No Parameters
@@ -82,7 +86,8 @@ class GUI:
         ).grid(
             row=1,
             column=0,
-            pady=(25, 5)
+            pady=(25, 5),
+            sticky=E
         )
         Entry(
             f,
@@ -94,7 +99,8 @@ class GUI:
         ).grid(
             row=1,
             column=1,
-            pady=(25, 10)
+            pady=(25, 10),
+            sticky=W
         )
         Label(
             f,
@@ -105,6 +111,7 @@ class GUI:
         ).grid(
             row=2,
             column=0,
+            sticky=E
         )
         Entry(
             f,
@@ -115,7 +122,8 @@ class GUI:
             relief=SOLID,
         ).grid(
             row=2,
-            column=1
+            column=1,
+            sticky=W
         )
         Button(
             f,
@@ -275,7 +283,8 @@ class GUI:
         ).grid(
             row=1,
             column=0,
-            pady=(25, 5)
+            pady=(25, 5),
+            sticky=E
         )
 
         Entry(
@@ -288,7 +297,8 @@ class GUI:
         ).grid(
             row=1,
             column=1,
-            pady=(25, 10)
+            pady=(25, 10),
+            sticky=W
         )
 
         Label(
@@ -300,7 +310,8 @@ class GUI:
         ).grid(
             row=2,
             column=0,
-            pady=(0, 5)
+            pady=(0, 5),
+            sticky=E
         )
 
         Entry(
@@ -313,7 +324,8 @@ class GUI:
         ).grid(
             row=2,
             column=1,
-            pady=(0, 10)
+            pady=(0, 10),
+            sticky=W
         )
 
         Label(
@@ -325,6 +337,7 @@ class GUI:
         ).grid(
             row=3,
             column=0,
+            sticky=E
         )
 
         Entry(
@@ -336,10 +349,11 @@ class GUI:
             relief=SOLID,
         ).grid(
             row=3,
-            column=1
+            column=1,
+            sticky=W
         )
 
-        b = Button(
+        Button(
             f,
             width=7,
             height=1,
@@ -387,43 +401,247 @@ class GUI:
 
         f.pack()
 
-    # * Account Form Screen
+    # * Welcome Message
     # * Parameters: root, First Name -> String
     # * No Return Value
     @classmethod
-    def accountForm(cls, root, firstName):
+    def welcomeMsg(cls, root, firstName):
 
-        welcomeMsg = Frame(root, width=650, height=55, bg='#333333')
+        f = Frame(root, width=650, height=55, bg='#333333')
 
         Label(
-            welcomeMsg,
-            text="Hello, ",
-            font=('Kamerik 105 W00 Bold', 16),
+            f,
+            text="Hello,",
+            font=('JetBrains Mono Medium', 14),
             bg='#333333',
             fg='white',
+            borderwidth=0
         ).grid(
             row=0,
             column=0,
             pady=(5, 0),
-            padx=(5, 0)
+            padx=(5, 0),
+            sticky=E
         )
 
         Label(
-            welcomeMsg,
+            f,
             text=firstName,
-            font=('Kamerik 105 W00 Bold', 16),
+            font=('JetBrains Mono Medium', 14),
+            bg='#333333',
+            fg='#75E6DA',
+            borderwidth=0
+        ).grid(
+            row=0,
+            column=1,
+            pady=(5, 0),
+            sticky=W
+        )
+
+        f.pack(anchor='w', fill='x')
+
+
+    # * Account Form Screen
+    # * Parameters: root
+    # * No Return Value
+    @classmethod
+    def accountForm(cls, root):
+
+        platform = StringVar()
+        url = StringVar()
+        email = StringVar()
+        user_name = StringVar()
+        password = StringVar()
+        
+        f = Frame(root, width=650, height=305, bg='#333333')
+
+
+        Label(
+            f,
+            text='Account Form',
+            font=('Kamerik 105 W00 Bold', 24),
             bg='#333333',
             fg='#75E6DA',
         ).grid(
             row=0,
-            column=1,
-            pady=(3, 0)
+            column=0,
+            columnspan=3,
+            pady=(15, 0)
         )
 
-        welcomeMsg.pack(anchor='w', fill='x')
-        f = Frame(root, width=650, height=305, bg='#333333')
+        Label(
+            f,
+            text="Platform Name: ",
+            font=('JetBrains Mono Medium', 12),
+            bg='#333333',
+            fg='white'
+        ).grid(
+            row=1,
+            column=0,
+            pady=(25, 5),
+            sticky=E
+        )
 
-        f.pack(anchor='center')
+        Entry(
+            f,
+            font=('JetBrains Mono Medium', 12),
+            bg='#595959',
+            fg='white',
+            relief=SOLID,
+            textvariable=platform,
+        ).grid(
+            row=1,
+            column=1,
+            pady=(25, 10),
+            columnspan=2,
+            sticky=W
+        )        
+
+        Label(
+            f,
+            text="Platform URL: ",
+            font=('JetBrains Mono Medium', 12),
+            bg='#333333',
+            fg='white'
+        ).grid(
+            row=2,
+            column=0,
+            pady=(0, 5),
+            sticky=E
+        )
+
+        Entry(
+            f,
+            textvariable=url,
+            font=('JetBrains Mono Medium', 12),
+            bg='#595959',
+            fg='white',
+            relief=SOLID,
+        ).grid(
+            row=2,
+            column=1,
+            pady=(0, 10),
+            columnspan=2,
+            sticky=W
+        )
+
+        Label(
+            f,
+            text="Account Email: ",
+            font=('JetBrains Mono Medium', 12),
+            bg='#333333',
+            fg='white'
+        ).grid(
+            row=3,
+            column=0,
+            pady=(0, 5),
+            sticky=E
+        )
+
+        Entry(
+            f,
+            textvariable=email,
+            font=('JetBrains Mono Medium', 12),
+            bg='#595959',
+            fg='white',
+            relief=SOLID,
+        ).grid(
+            row=3,
+            column=1,
+            pady=(0, 10),
+            columnspan=2,
+            sticky=W
+        )
+
+        Label(
+            f,
+            text="Account Username: ",
+            font=('JetBrains Mono Medium', 12),
+            bg='#333333',
+            fg='white'
+        ).grid(
+            row=4,
+            column=0,
+            pady=(0, 5),
+            sticky=E
+        )
+
+        Entry(
+            f,
+            textvariable=user_name,
+            font=('JetBrains Mono Medium', 12),
+            bg='#595959',
+            fg='white',
+            relief=SOLID,
+        ).grid(
+            row=4,
+            column=1,
+            pady=(0, 10),
+            columnspan=2,
+            sticky=W
+        )
+
+        Label(
+            f,
+            text="Account Password: ",
+            font=('JetBrains Mono Medium', 12),
+            bg='#333333',
+            fg='white'
+        ).grid(
+            row=5,
+            column=0,
+            pady=(0, 5),
+            sticky=E
+        )
+
+        Entry(
+            f,
+            textvariable=password,
+            font=('JetBrains Mono Medium', 12),
+            bg='#595959',
+            fg='white',
+            relief=SOLID,
+        ).grid(
+            row=5,
+            column=1,
+            pady=(0, 10),
+            sticky=W
+        )
+
+        l = Label(
+            f,
+            image=cls.__images[2],
+            font=('JetBrains Mono Medium', 10),
+            bg='#333333',
+            fg='white',
+            cursor='hand2'
+        )
+        l.bind("<Button-1>", lambda e:0+0)
+        l.grid(row=5, column=2,padx=(7, 0),)
+
+        Button(
+            f,
+            width=7,
+            height=1,
+            relief=SOLID,
+            borderwidth=2,
+            # command=lambda: signUpFunction(
+                # first_name.get(), master_user_name.get(), master_password.get()),
+            text="Sign Up",
+            font=('Kamerik 105 W00 Bold', 10),
+            bg='#454545',
+            highlightcolor="white",
+            highlightbackground="white",
+            highlightthickness=4,
+            fg='#75E6DA'
+        ).grid(
+            row=7,
+            column=0,
+            columnspan=3,
+            pady=(10, 0)
+        )
+
+        f.pack()
 
     # * All Accounts List Sub Screen
     @classmethod
