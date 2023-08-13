@@ -182,11 +182,11 @@ class GUI:
     def successfullMessage(cls, root: Frame, actionValue) -> None:
 
         if actionValue == Action.LogIn:
-            message = 'Login Unsuccessfull'
+            message = 'Login Successfull'
         elif actionValue == Action.Register:
-            message = 'Registration Unsuccessfull'
+            message = 'Registration Successfull'
         elif actionValue == Action.Account:
-            message = 'Account Information cannot be Added'
+            message = 'Account Information has been Added'
 
         f = Frame(root, width=500, height=55, bg='#333333')
 
