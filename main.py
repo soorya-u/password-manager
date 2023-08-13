@@ -52,7 +52,7 @@ def signInFunction(master_user_name: str, master_password: str) -> None:
         if Hashing.verifyingHash(master_password, stored_password_hash):
             if len(footer_frame.winfo_children()):
                 footer_frame.winfo_children()[0].destroy()
-            first_name = Database.getUserFirstName()
+            first_name = Database.getUserFirstName(master_user_name)
             userData.append(master_user_name)
             userData.append(first_name)
             GUI.successfullMessage(footer_frame, Action.LogIn)
@@ -99,14 +99,29 @@ def formAndList() -> None:
     footer_frame = Frame(frmLstWindow, bg='#333333')
 
     GUI.welcomeMsg(header_frame, userData[1])
-    GUI.accountForm(main_frame)
+    GUI.accountForm(main_frame, addAccount)
     GUI.successfullMessage(footer_frame, Action.Account)
 
-    header_frame.pack(fill=X,anchor=W,side=TOP)
+    header_frame.pack()
     main_frame.pack()
     footer_frame.pack()
 
     frmLstWindow.mainloop()
+
+def addAccount(platform, url, email, user_name, password):
+    
+    try:
+        unique_key = Database.getUserUniqueKey(userData[0]).encode()
+        encrypted_password = Cryptography.encrypt(password, unique_key).decode()
+        del unique_key
+        Database.accountInsertion(userData[0], platform, url, email, user_name, encrypted_password)
+        if len(footer_frame.winfo_children()):
+                footer_frame.winfo_children()[0].destroy()
+        GUI.successfullMessage(footer_frame, Action.Account)
+    except:
+        if len(footer_frame.winfo_children()):
+            footer_frame.winfo_children()[0].destroy()
+        GUI.unsuccessfullMessage(footer_frame, Action.Account)
     
 loginAndRegister()
 

@@ -57,6 +57,7 @@ class Database:
     # * Function to insert Account
     # * Parameters: Master Username, Platform, URL, Email, Username, Encrypted Password
     # * No Return Value
+    @classmethod
     def accountInsertion(cls, master_user_name: str, platform: str, url: str, email: str, user_name: str, encrypted_password: str) -> None:
         conn = Database._sqliteConnection()
         c = conn.cursor()

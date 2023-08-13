@@ -13,7 +13,7 @@ class GUI:
 
     login_geometry = [500, 300]
     register_geometry = [500, 335]
-    form_geometry = [650, 400]
+    form_geometry = [650, 410]
     __images = []
 
     # * Function to Clear Images
@@ -414,31 +414,40 @@ class GUI:
         Label(
             f,
             text="Hello,",
-            font=('JetBrains Mono Medium', 14),
+            font=('JetBrains Mono Medium', 12),
             bg='#333333',
             fg='white',
-            borderwidth=0
         ).grid(
             row=0,
             column=0,
-            pady=(5, 0),
-            padx=(5, 0),
+            pady=(2, 0),
+            padx=(2, 0),
             sticky=E
         )
 
         Label(
             f,
             text=firstName,
-            font=('JetBrains Mono Medium', 14),
+            font=('JetBrains Mono Medium', 12),
             bg='#333333',
             fg='#75E6DA',
-            borderwidth=0
         ).grid(
             row=0,
             column=1,
-            pady=(5, 0),
+            pady=(2, 0),
             sticky=W
         )
+
+        l = Label(
+            f,
+            text='View Account List',
+            font=('JetBrains Mono Medium', 12),
+            bg='#333333',
+            fg='white',
+            cursor='hand2'
+        )
+        l.grid(row=0, column=2, pady=(2, 0), padx=(325,0), sticky=E)
+        l.bind("<Button-1>", lambda: GUI.subWindow())
 
         f.pack(anchor='w', fill='x')
 
@@ -466,7 +475,7 @@ class GUI:
         ).grid(
             row=0,
             column=0,
-            columnspan=3,
+            columnspan=2,
             pady=(15, 0)
         )
 
@@ -494,7 +503,6 @@ class GUI:
             row=1,
             column=1,
             pady=(25, 10),
-            columnspan=2,
             sticky=W
         )
 
@@ -522,7 +530,6 @@ class GUI:
             row=2,
             column=1,
             pady=(0, 10),
-            columnspan=2,
             sticky=W
         )
 
@@ -550,7 +557,6 @@ class GUI:
             row=3,
             column=1,
             pady=(0, 10),
-            columnspan=2,
             sticky=W
         )
 
@@ -578,7 +584,6 @@ class GUI:
             row=4,
             column=1,
             pady=(0, 10),
-            columnspan=2,
             sticky=W
         )
 
@@ -591,7 +596,6 @@ class GUI:
         ).grid(
             row=5,
             column=0,
-            pady=(0, 5),
             sticky=E
         )
 
@@ -605,24 +609,25 @@ class GUI:
         ).grid(
             row=5,
             column=1,
-            pady=(0, 10),
             sticky=W
         )
 
         l = Label(
             f,
+            text=' Generate',
             image=cls.__images[2],
-            font=('JetBrains Mono Medium', 10),
+            compound=LEFT,
+            font=('JetBrains Mono Medium', 11),
             bg='#333333',
             fg='white',
             cursor='hand2'
         )
         l.bind("<Button-1>", lambda: 0+0)
-        l.grid(row=5, column=2, padx=(7, 0),)
+        l.grid(row=6, column=0, columnspan=2, sticky=E)
 
         Button(
             f,
-            width=7,
+            width=12,
             height=1,
             relief=SOLID,
             borderwidth=2,
@@ -638,8 +643,8 @@ class GUI:
         ).grid(
             row=7,
             column=0,
-            columnspan=3,
-            pady=(10, 0)
+            columnspan=2,
+            pady=(5, 0)
         )
 
         f.pack()
