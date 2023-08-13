@@ -35,6 +35,8 @@
 - `os`[^doc_os]
 - `PIL`[^doc_PIL]
 - `enum`[^doc_enum]
+- `random`[^doc_random]
+- `Random-Word`[^doc_Random-Word]
 
 ## Objectives
 
@@ -50,7 +52,7 @@
 
 - [x] Creating a Hash
 - [x] Verifying a Hash
-- [ ] Generating a Strong Password
+- [x] Generating a Strong Password
 
 ### Database Tasks
 
@@ -85,7 +87,7 @@
 - [x] Unsuccessfull Message
 - [ ] Display All Errors done by Users
 - [x] Welcome Message
-- [ ] Account Form Window
+- [x] Account Form Window
 - [ ] Dropdown Subwindow
 
 ### Others
@@ -95,7 +97,8 @@
 - [x] SignIn Backend Function
 - [x] SignUp Backend Function
 - [x] Login and Register Main Function
-- [ ] Account Form and List Main Function
+- [ ] Account Form Function
+- [ ] Account List Function
 
 [^doc_cryptography]: [*cryptography*](https://cryptography.io/en/latest/)
 [^doc_sqlite3]: [*sqlite3*](https://docs.python.org/3/library/sqlite3.html)
@@ -105,3 +108,5 @@
 [^doc_os]: [*os*](https://docs.python.org/3/library/os.html)
 [^doc_PIL]: [*PIL*](https://pypi.org/project/Pillow/)
 [^doc_enum]: [*enum*](https://docs.python.org/3/library/enum.html)
+[^doc_random]: [*random*](https://docs.python.org/3/library/random.html)
+[^doc_Random-Word]: [*Random-Word*](https://pypi.org/project/Random-Word/)
