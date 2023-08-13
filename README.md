@@ -70,7 +70,7 @@
 ### Regular Expression Tasks
 
 - [x] Setting Master Username Rules
-- [x] Setting Master Passowrd Rules
+- [x] Setting Master Password Rules
 
 ### Graphical User Interface Tasks
 
