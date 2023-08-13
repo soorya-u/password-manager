@@ -97,7 +97,7 @@
 - [x] SignIn Backend Function
 - [x] SignUp Backend Function
 - [x] Login and Register Main Function
-- [ ] Account Form Function
+- [x] Account Form Function
 - [ ] Account List Function
 
 [^doc_cryptography]: [*cryptography*](https://cryptography.io/en/latest/)
