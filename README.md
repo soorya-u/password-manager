@@ -1,22 +1,22 @@
 # **Password Manager**
 
+## Introduction
+
 **Description**: The password manager is a Python project that securely stores and manages user passwords. It allows users to store their passwords for various accounts, generate strong passwords, and retrieve passwords when needed.
 
 **Scope**: The scope of this project involves implementing encryption algorithms to secure password storage, designing a user interface to input and retrieve passwords, and developing functions to generate strong passwords and store/retrieve them from a database.
 
 **Concepts Used**: The Concepts of *Hashing* and *Encryption* has been used along with the implementation of a *Basic Database* and a *Graphical User Interface*. The Detailed Description of the Project has been given below.
 
-# **Modules Used**
+## Modules Used
 
 ### Cryptography
 
 `cryptography`[^doc_cryptography] is a package which provides cryptographic recipes and primitives in Python. It is used to Encrypt and Decrypt User Passwords using a Unique Key.
 
-
 ### Database
 
 `sqlite3`[^doc_sqlite3] is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine. It is used to store and maintain datas recieved from the user.
-
 
 ### Graphical User Interface
 
@@ -36,9 +36,9 @@
 - `PIL`[^doc_PIL]
 - `enum`[^doc_enum]
 
-# **Objectives**
+## Objectives
 
-### Cryptography
+### Cryptography Tasks
 
 - [x] Generating Unique Key
 - [x] Getting Unique Key
@@ -46,13 +46,13 @@
 - [x] Encryption of Data
 - [x] Decryption of Data
 
-### Hashing
+### Hashing Tasks
 
 - [x] Creating a Hash
 - [x] Verifying a Hash
 - [ ] Generating a Strong Password
 
-### Database
+### Database Tasks
 
 - [x] Creation and Initialization of Database
 - [ ] Altering Read-Write Permissions of Database
@@ -66,12 +66,12 @@
 - [ ] Delete Account Details
 - [ ] Update Account Details
 
-### Regular Expression
+### Regular Expression Tasks
 
 - [x] Setting Master Username Rules
 - [x] Setting Master Passowrd Rules
 
-### Graphical User Interface
+### Graphical User Interface Tasks
 
 - [x] Setting Dimensions for Each Window
 - [x] Initialization of Images For Login and Register Window
