@@ -54,6 +54,7 @@
 
 ### Database Tasks
 
+- [ ] Creating a Default Path of Database inside AppData
 - [x] Creation and Initialization of Database
 - [ ] Altering Read-Write Permissions of Database
 - [x] Establishing Database Connection
