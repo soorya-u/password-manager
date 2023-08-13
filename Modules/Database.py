@@ -16,7 +16,7 @@ class Database:
     # * No Parameters
     # * No Return Value
     @classmethod
-    def init(cls):
+    def init(cls) -> None:
         if not os.path.exists('.database'):
             os.mkdir('.database')
             conn = Database._sqliteConnection()
@@ -35,7 +35,7 @@ class Database:
     # * Parameters: First Name, Master Username, Hashed Password, Unique Key
     # * No Return Value
     @classmethod
-    def userInsertion(cls, first_name, master_user_name, hashed_password, unique_key):
+    def userInsertion(cls, first_name: str, master_user_name: str, hashed_password: str, unique_key: str) -> None:
         conn = Database._sqliteConnection()
         c = conn.cursor()
         c.execute(f'''
@@ -57,7 +57,7 @@ class Database:
     # * Function to insert Account
     # * Parameters: Master Username, Platform, URL, Email, Username, Encrypted Password
     # * No Return Value
-    def accountInsertion(cls, master_user_name, platform, url, email, user_name, encrypted_password):
+    def accountInsertion(cls, master_user_name: str, platform: str, url: str, email: str, user_name: str, encrypted_password: str) -> None:
         conn = Database._sqliteConnection()
         c = conn.cursor()
         c.execute(f'''
@@ -70,7 +70,7 @@ class Database:
     # * Parameters: Master Username
     # * Return Value: Hashed Password -> String
     @classmethod
-    def getUserHashedPassword(cls, master_user_name):
+    def getUserHashedPassword(cls, master_user_name: str) -> str:
         conn = Database._sqliteConnection()
         c = conn.cursor()
         data = list(c.execute(
@@ -83,7 +83,7 @@ class Database:
     # * Parameters: Master Username
     # * Return Value: Unique Key -> String
     @classmethod
-    def getUserUniqueKey(cls, master_user_name):
+    def getUserUniqueKey(cls, master_user_name: str) -> str:
         conn = Database._sqliteConnection()
         c = conn.cursor()
         data = list(c.execute(
@@ -96,7 +96,7 @@ class Database:
     # * Parameters: Master Username
     # * Return Value: First Name -> String
     @classmethod
-    def getUserFirstName(cls, master_user_name):
+    def getUserFirstName(cls, master_user_name: str) -> str:
         conn = Database._sqliteConnection()
         c = conn.cursor()
         data = list(c.execute(
@@ -109,7 +109,7 @@ class Database:
     # * Parameters: Master Username
     # * Return Value: All Account List -> List
     @classmethod
-    def getAccountTable(cls, master_user_name):
+    def getAccountTable(cls, master_user_name: str) -> list[list[str]]:
         conn = Database._sqliteConnection()
         c = conn.cursor()
         data = c.execute(f'''select * from {master_user_name}''').fetchall()

@@ -12,17 +12,17 @@ loginGeo = GUI.login_geometry
 regGeo = GUI.register_geometry
 frmGeo = GUI.form_geometry
 
-def lgnToReg(event):
+def lgnToReg(event) -> None:
     lgnRegWindow.geometry(f'{regGeo[0]}x{regGeo[1]}')
     main_frame.winfo_children()[0].destroy()
     GUI.register(main_frame, signUpFunction, regToLgn)
 
-def regToLgn(event):
+def regToLgn(event) -> None:
     lgnRegWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
     main_frame.winfo_children()[0].destroy()
     GUI.login(main_frame, signInFunction, lgnToReg)
 
-def signUpFunction(first_name, master_user_name, master_password):
+def signUpFunction(first_name: str, master_user_name: str, master_password: str) -> None:
 
     if Regex.verifyMasterUserName(master_user_name) and Regex.verifyPassword(master_password):
         hashed_password = Hashing.creatingHash(master_password)
@@ -45,7 +45,7 @@ def signUpFunction(first_name, master_user_name, master_password):
                 footer_frame.winfo_children()[0].destroy()
             GUI.unsuccessfullMessage(footer_frame, Action.Register)
 
-def signInFunction(master_user_name, master_password):
+def signInFunction(master_user_name: str, master_password: str) -> None:
 
     try:
         stored_password_hash = Database.getUserHashedPassword(master_user_name)
@@ -64,7 +64,7 @@ def signInFunction(master_user_name, master_password):
             footer_frame.winfo_children()[0].destroy()
         GUI.unsuccessfullMessage(footer_frame, Action.LogIn)
 
-def loginAndRegister():
+def loginAndRegister() -> None:
 
     global lgnRegWindow
     lgnRegWindow = Tk()
@@ -84,7 +84,7 @@ def loginAndRegister():
 
     lgnRegWindow.mainloop()
 
-def formAndList():
+def formAndList() -> None:
 
     global frmLstWindow
     frmLstWindow = Tk()

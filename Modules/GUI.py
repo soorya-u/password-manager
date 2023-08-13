@@ -30,7 +30,8 @@ class GUI:
     def frmLstInit(cls):
         import_tick_image = Image.open(r".\Images\tick_image.png")
         import_cross_image = Image.open(r".\Images\cross_image.png")
-        import_generate_password_image = Image.open(r".\Images\generate_password.png")
+        import_generate_password_image = Image.open(
+            r".\Images\generate_password.png")
         resized_tick_image = import_tick_image.resize(
             (40, 40), Image.LANCZOS)
         resized_cross_image = import_cross_image.resize(
@@ -39,7 +40,8 @@ class GUI:
             (40, 40), Image.LANCZOS)
         cls.__images.append(ImageTk.PhotoImage(resized_tick_image))
         cls.__images.append(ImageTk.PhotoImage(resized_cross_image))
-        cls.__images.append(ImageTk.PhotoImage(resized_generate_password_image))
+        cls.__images.append(ImageTk.PhotoImage(
+            resized_generate_password_image))
 
     # * Function to Fetch Images for Login and Register
     # * No Parameters
@@ -59,7 +61,7 @@ class GUI:
     # * Parameters: root, SignIn Function and Login to Register Function
     # * No Return Value
     @classmethod
-    def login(cls, root, signInFunction, lgnToRegShifter):
+    def login(cls, root: Frame, signInFunction, lgnToRegShifter) -> None:
 
         master_user_name = StringVar()
         master_password = StringVar()
@@ -177,7 +179,7 @@ class GUI:
     # * Parameters: root and Action Value -> Enum
     # * No Return Value
     @classmethod
-    def successfullMessage(cls, root, actionValue):
+    def successfullMessage(cls, root: Frame, actionValue) -> None:
 
         if actionValue == Action.LogIn:
             message = 'Login Unsuccessfull'
@@ -216,7 +218,7 @@ class GUI:
     # * Parameters: root and Action Value -> Enum
     # * No Return Value
     @classmethod
-    def unsuccessfullMessage(cls, root, actionValue):
+    def unsuccessfullMessage(cls, root: Frame, actionValue) -> None:
 
         if actionValue == Action.LogIn:
             message = 'Login Unsuccessfull'
@@ -254,7 +256,7 @@ class GUI:
     # * Parameters: root, SignUp Function and Register to Login Function
     # * No Return Value
     @classmethod
-    def register(cls, root, signUpFunction, regToLgnShifter):
+    def register(cls, root: Frame, signUpFunction, regToLgnShifter) -> None:
         first_name = StringVar()
         master_user_name = StringVar()
         master_password = StringVar()
@@ -405,7 +407,7 @@ class GUI:
     # * Parameters: root, First Name -> String
     # * No Return Value
     @classmethod
-    def welcomeMsg(cls, root, firstName):
+    def welcomeMsg(cls, root: Frame, firstName: str):
 
         f = Frame(root, width=650, height=55, bg='#333333')
 
@@ -440,21 +442,20 @@ class GUI:
 
         f.pack(anchor='w', fill='x')
 
-
     # * Account Form Screen
     # * Parameters: root
     # * No Return Value
+
     @classmethod
-    def accountForm(cls, root):
+    def accountForm(cls, root: Frame, addAccount):
 
         platform = StringVar()
         url = StringVar()
         email = StringVar()
         user_name = StringVar()
         password = StringVar()
-        
-        f = Frame(root, width=650, height=305, bg='#333333')
 
+        f = Frame(root, width=650, height=305, bg='#333333')
 
         Label(
             f,
@@ -495,7 +496,7 @@ class GUI:
             pady=(25, 10),
             columnspan=2,
             sticky=W
-        )        
+        )
 
         Label(
             f,
@@ -616,8 +617,8 @@ class GUI:
             fg='white',
             cursor='hand2'
         )
-        l.bind("<Button-1>", lambda e:0+0)
-        l.grid(row=5, column=2,padx=(7, 0),)
+        l.bind("<Button-1>", lambda: 0+0)
+        l.grid(row=5, column=2, padx=(7, 0),)
 
         Button(
             f,
@@ -625,9 +626,9 @@ class GUI:
             height=1,
             relief=SOLID,
             borderwidth=2,
-            # command=lambda: signUpFunction(
-                # first_name.get(), master_user_name.get(), master_password.get()),
-            text="Sign Up",
+            command=lambda: addAccount(
+                platform.get(), url.get(), email.get(), user_name.get(), password.get()),
+            text="Add Account",
             font=('Kamerik 105 W00 Bold', 10),
             bg='#454545',
             highlightcolor="white",
