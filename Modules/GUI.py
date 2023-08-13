@@ -91,14 +91,15 @@ class GUI:
             pady=(25, 5),
             sticky=E
         )
-        Entry(
+        e_master_user_name = Entry(
             f,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
             textvariable=master_user_name
-        ).grid(
+        )
+        e_master_user_name.grid(
             row=1,
             column=1,
             pady=(25, 10),
@@ -115,14 +116,15 @@ class GUI:
             column=0,
             sticky=E
         )
-        Entry(
+        e_master_password = Entry(
             f,
             textvariable=master_password,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
-        ).grid(
+        )
+        e_master_password.grid(
             row=2,
             column=1,
             sticky=W
@@ -133,8 +135,10 @@ class GUI:
             height=1,
             relief=SOLID,
             borderwidth=2,
-            command=lambda: signInFunction(
-                master_user_name.get(), master_password.get()),
+            command=lambda: [
+                signInFunction(master_user_name.get(), master_password.get(
+                )), e_master_user_name.delete(0, END), e_master_password.delete(0, END)
+            ],
             text="Sign In",
             font=('Kamerik 105 W00 Bold', 10),
             bg='#454545',
@@ -289,14 +293,15 @@ class GUI:
             sticky=E
         )
 
-        Entry(
+        e_first_name = Entry(
             f,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
             textvariable=first_name
-        ).grid(
+        )
+        e_first_name.grid(
             row=1,
             column=1,
             pady=(25, 10),
@@ -316,14 +321,15 @@ class GUI:
             sticky=E
         )
 
-        Entry(
+        e_master_user_name = Entry(
             f,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
             textvariable=master_user_name
-        ).grid(
+        )
+        e_master_user_name.grid(
             row=2,
             column=1,
             pady=(0, 10),
@@ -342,14 +348,15 @@ class GUI:
             sticky=E
         )
 
-        Entry(
+        e_master_password = Entry(
             f,
             textvariable=master_password,
             font=('JetBrains Mono Medium', 12),
             bg='#595959',
             fg='white',
             relief=SOLID,
-        ).grid(
+        )
+        e_master_password.grid(
             row=3,
             column=1,
             sticky=W
@@ -361,8 +368,12 @@ class GUI:
             height=1,
             relief=SOLID,
             borderwidth=2,
-            command=lambda: signUpFunction(
-                first_name.get(), master_user_name.get(), master_password.get()),
+            command=lambda: [
+                signUpFunction(first_name.get(),
+                               master_user_name.get(), master_password.get()),
+                e_first_name.delete(0, END), e_master_user_name.delete(
+                    0, END), e_master_password(0, END)
+            ],
             text="Sign Up",
             font=('Kamerik 105 W00 Bold', 10),
             bg='#454545',
@@ -463,6 +474,7 @@ class GUI:
         email = StringVar()
         user_name = StringVar()
         password = StringVar()
+        password_length = StringVar()
 
         f = Frame(root, width=650, height=305, bg='#333333')
 
@@ -604,7 +616,7 @@ class GUI:
             cursor='hand2'
         )
         l.bind("<Button-1>",
-               lambda e: [e_password.delete(0, END), e_password.insert(0, getGeneratedPassword())])
+               lambda e: [e_password.delete(0, END), e_password.insert(0, getGeneratedPassword(16))])
         l.grid(row=6, column=0, columnspan=2, sticky=E)
 
         Button(

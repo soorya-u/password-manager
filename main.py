@@ -72,6 +72,7 @@ def loginAndRegister() -> None:
     global lgnRegWindow
     lgnRegWindow = Tk()
     GUI.lgnRegInit()
+    lgnRegWindow.resizable(False, False)
     lgnRegWindow.title("Password Manager")
     lgnRegWindow.config(background='#333333')
     lgnRegWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
@@ -93,6 +94,7 @@ def formAndList() -> None:
     frmLstWindow = Tk()
     GUI.frmLstInit()
     frmLstWindow.title("Password Manager")
+    frmLstWindow.resizable(False, False)
     frmLstWindow.config(background='#333333')
     frmLstWindow.geometry(f'{frmGeo[0]}x{frmGeo[1]}')
 
@@ -112,7 +114,7 @@ def formAndList() -> None:
 
     frmLstWindow.mainloop()
 
-def addAccount(platform, url, email, user_name, password):
+def addAccount(platform: str, url: str, email: str, user_name: str, password: str):
     
     try:
         unique_key = Database.getUserUniqueKey(userData[0]).encode()
@@ -129,9 +131,11 @@ def addAccount(platform, url, email, user_name, password):
         GUI.unsuccessfullMessage(footer_frame, Action.Account)
         footer_frame.after(2000, lambda: footer_frame.winfo_children()[0].destroy())
 
-def getGeneratedPassword():
-    pass
-    
+def getGeneratedPassword(n: int) -> str:
+        p = Hashing.generatePassword(n)
+        if Regex.verifyPassword(p):
+            return p
+       
 loginAndRegister()
 
 if(exit_code==1):
