@@ -131,7 +131,9 @@ def addAccount(platform: str, url: str, email: str, user_name: str, password: st
         GUI.unsuccessfullMessage(footer_frame, Action.Account)
         footer_frame.after(2000, lambda: footer_frame.winfo_children()[0].destroy())
 
-def getGeneratedPassword(n: int) -> str:
+def getGeneratedPassword(n: int = 15) -> str:
+    
+    while True:
         p = Hashing.generatePassword(n)
         if Regex.verifyPassword(p):
             return p

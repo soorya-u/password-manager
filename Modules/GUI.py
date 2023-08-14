@@ -135,6 +135,7 @@ class GUI:
             height=1,
             relief=SOLID,
             borderwidth=2,
+            cursor='hand2',
             command=lambda: [
                 signInFunction(master_user_name.get(), master_password.get(
                 )), e_master_user_name.delete(0, END), e_master_password.delete(0, END)
@@ -368,6 +369,7 @@ class GUI:
             height=1,
             relief=SOLID,
             borderwidth=2,
+            cursor='hand2',
             command=lambda: [
                 signUpFunction(first_name.get(),
                                master_user_name.get(), master_password.get()),
@@ -475,6 +477,7 @@ class GUI:
         user_name = StringVar()
         password = StringVar()
         password_length = StringVar()
+        password_length.set('Password Length')
 
         f = Frame(root, width=650, height=305, bg='#333333')
 
@@ -605,19 +608,50 @@ class GUI:
         )
         e_password.grid(row=5, column=1, sticky=W)
 
+        drop_down = OptionMenu(
+            f,
+            password_length,
+            *range(10,21),
+            
+        )
+
+        drop_down.config(
+            bg = '#333333', 
+            fg='white', 
+            relief=FLAT, 
+            font=('JetBrains Mono Medium', 10),
+            direction='below'
+        )
+        
+        drop_down['menu'].config(
+            bg='#333333', 
+            fg='white', 
+            relief=FLAT, 
+            borderwidth=1, 
+            font=('JetBrains Mono Medium', 10),
+        )
+        
+        drop_down["highlightthickness"]=0
+        drop_down.grid(
+            row=6,
+            column=0,
+            sticky=E,
+            padx=(0, 20)
+        )
+
         l = Label(
             f,
-            text=' Generate',
+            text=' Click to Generate',
             image=cls.__images[2],
             compound=LEFT,
-            font=('JetBrains Mono Medium', 11),
+            font=('JetBrains Mono Medium', 10),
             bg='#333333',
             fg='white',
             cursor='hand2'
         )
         l.bind("<Button-1>",
-               lambda e: [e_password.delete(0, END), e_password.insert(0, getGeneratedPassword(16))])
-        l.grid(row=6, column=0, columnspan=2, sticky=E)
+               lambda e: [e_password.delete(0, END), e_password.insert(0, getGeneratedPassword(int(password_length.get())))])
+        l.grid(row=6, column=1, sticky=W)
 
         Button(
             f,
@@ -625,6 +659,7 @@ class GUI:
             height=1,
             relief=SOLID,
             borderwidth=2,
+            cursor='hand2',
             command=lambda: [
                 addAccount(platform.get(), url.get(), email.get(),
                            user_name.get(), password.get()),
