@@ -611,27 +611,27 @@ class GUI:
         drop_down = OptionMenu(
             f,
             password_length,
-            *range(10,21),
-            
+            *range(10, 21),
+
         )
 
         drop_down.config(
-            bg = '#333333', 
-            fg='white', 
-            relief=FLAT, 
+            bg='#333333',
+            fg='white',
+            relief=FLAT,
             font=('JetBrains Mono Medium', 10),
             direction='below'
         )
-        
+
         drop_down['menu'].config(
-            bg='#333333', 
-            fg='white', 
-            relief=FLAT, 
-            borderwidth=1, 
+            bg='#333333',
+            fg='white',
+            relief=FLAT,
+            borderwidth=1,
             font=('JetBrains Mono Medium', 10),
         )
-        
-        drop_down["highlightthickness"]=0
+
+        drop_down["highlightthickness"] = 0
         drop_down.grid(
             row=6,
             column=0,
@@ -650,7 +650,11 @@ class GUI:
             cursor='hand2'
         )
         l.bind("<Button-1>",
-               lambda e: [e_password.delete(0, END), e_password.insert(0, getGeneratedPassword(int(password_length.get())))])
+               lambda e: [
+                   e_password.delete(0, END), e_password.insert(
+                       0, getGeneratedPassword(int(password_length.get())))
+               ]
+               )
         l.grid(row=6, column=1, sticky=W)
 
         Button(
