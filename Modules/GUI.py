@@ -466,9 +466,8 @@ class GUI:
         f.pack(anchor='w', fill='x')
 
     # * Account Form Screen
-    # * Parameters: root
+    # * Parameters: root, Add Account -> Function, Get Generated Password-> Function
     # * No Return Value
-
     @classmethod
     def accountForm(cls, root: Frame, addAccount, getGeneratedPassword):
 
@@ -690,20 +689,23 @@ class GUI:
 
     # * All Accounts List Sub Screen
     @classmethod
-    def subWindow(cls, root: Frame, account_list) -> None:
+    def subWindow(cls, root: Frame, account_list: list[list[str]]) -> None:
+
+        heading_list = ['Platform', 'URL', 'Email', 'Username', 'Password']
 
         sub_window = Toplevel(
             root,
             bg='#333333',
-            height=410,
-            width=650
+            height=400,
+            width=1300
         )
 
-        sub_window.minsize(650, 410)
-        sub_window.maxsize(650, 410)
+        sub_window.resizable(0, 1)
+        sub_window.minsize(1300, 200)
+        sub_window.maxsize(1300, 793)
 
-        upper_frame = Frame(sub_window, width=650, height=55, bg='#333333')
-        middle_frame = Frame(sub_window, width=650, height=355, bg='#333333')
+        upper_frame = Frame(sub_window, width=1300, bg='#333333')
+        middle_frame = Frame(sub_window, width=1300, bg='#333333')
 
         Label(
             upper_frame,
@@ -714,7 +716,53 @@ class GUI:
         ).grid(
             row=0,
             column=0,
-            pady=(15, 0)
+            pady=(15, 30)
         )
 
         upper_frame.pack()
+
+        for heading in heading_list:
+
+            Label(
+                middle_frame,
+                text=heading,
+                font=('JetBrains Mono Medium', 12),
+                bg='#333333',
+                fg='#75E6DA',
+                borderwidth=1,
+                relief=SOLID,
+                width=25
+            ).grid(
+                row=0,
+                column=heading_list.index(heading),
+                ipady=7
+            )
+
+        i = 1
+
+        for record in account_list:
+
+            j = 0
+
+            for cell_data in record:
+
+                Label(
+                    middle_frame,
+                    text=cell_data,
+                    font=('JetBrains Mono Medium', 12),
+                    bg='#333333',
+                    fg='white',
+                    borderwidth=1,
+                    relief=SOLID,
+                    width=25
+                ).grid(
+                    row=i,
+                    column=j,
+                    ipady=7
+                )
+
+                j += 1
+
+            i += 1
+
+        middle_frame.pack()

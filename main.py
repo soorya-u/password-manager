@@ -149,8 +149,7 @@ def getAccountTable():
         password = Cryptography.decrypt(encrypted_password, unique_key)
         record.insert(len(record),password)
 
-getAccountTable()
-
+    return data
 
 loginAndRegister()
 
