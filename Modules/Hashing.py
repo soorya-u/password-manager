@@ -1,6 +1,6 @@
 import hashlib
 import random
-from random_word import RandomWords
+from wonderwords import RandomWord
 
 class Hashing:
 
@@ -29,8 +29,8 @@ class Hashing:
     def generatePassword(cls,n:int) -> str:
         spec_char = r'''!@$%^&*()_+-={}[]|\:;"'?/><,.~`#'''
         spec_char_len = len(spec_char)
-        rw = RandomWords()
-        hash = hashlib.sha512(rw.get_random_word().encode()).hexdigest()
+        rw = RandomWord()
+        hash = hashlib.sha512(rw.word().encode()).hexdigest()
         rInt = random.randint(0, len(hash)-n-1)
         l = list(hash[rInt:rInt+n])
         for i in range(n//2):

@@ -36,7 +36,7 @@
 - `PIL`[^doc_PIL]
 - `enum`[^doc_enum]
 - `random`[^doc_random]
-- `Random-Word`[^doc_Random-Word]
+- `wonderwords`[^doc_wonderwords]
 
 ## Objectives
 
@@ -110,4 +110,4 @@
 [^doc_PIL]: [*PIL*](https://pypi.org/project/Pillow/)
 [^doc_enum]: [*enum*](https://docs.python.org/3/library/enum.html)
 [^doc_random]: [*random*](https://docs.python.org/3/library/random.html)
-[^doc_Random-Word]: [*Random-Word*](https://pypi.org/project/Random-Word/)
+[^doc_wonderwords]: [*wonderwords*](https://pypi.org/project/wonderwords/)

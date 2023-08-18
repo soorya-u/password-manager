@@ -1,3 +1,3 @@
 cryptography
 Pillow
-Random-Word
+wonderwords
