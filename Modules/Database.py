@@ -45,7 +45,7 @@ class Database:
 
         c.execute(f'''
                     create table {master_user_name} (
-                        website varchar(255),
+                        platform varchar(255),
                         url varchar(255),
                         email varchar(255),
                         user_name varchar(255),
@@ -110,7 +110,7 @@ class Database:
     # * Parameters: Master Username
     # * Return Value: All Account List -> List
     @classmethod
-    def getAccountTable(cls, master_user_name: str) -> list[list[str]]:
+    def getAccountTable(cls, master_user_name: str):
         conn = Database._sqliteConnection()
         c = conn.cursor()
         data = c.execute(f'''select * from {master_user_name}''').fetchall()
