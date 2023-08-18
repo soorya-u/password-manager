@@ -420,9 +420,10 @@ class GUI:
     # * Parameters: root, First Name -> String
     # * No Return Value
     @classmethod
-    def welcomeMsg(cls, root: Frame, firstName: str):
+    def welcomeMsg(cls, root: Frame, firstName: str, getAccountTable) -> None:
 
         f = Frame(root, width=650, height=55, bg='#333333')
+        platform_list = []
 
         Label(
             f,
@@ -460,7 +461,7 @@ class GUI:
             cursor='hand2'
         )
         l.grid(row=0, column=2, pady=(2, 0), padx=(325, 0), sticky=E)
-        l.bind("<Button-1>", lambda: GUI.subWindow())
+        l.bind("<Button-1>", lambda e: GUI.subWindow(f, getAccountTable()))
 
         f.pack(anchor='w', fill='x')
 
@@ -689,5 +690,31 @@ class GUI:
 
     # * All Accounts List Sub Screen
     @classmethod
-    def subWindow(cls):
-        pass
+    def subWindow(cls, root: Frame, account_list) -> None:
+
+        sub_window = Toplevel(
+            root,
+            bg='#333333',
+            height=410,
+            width=650
+        )
+
+        sub_window.minsize(650, 410)
+        sub_window.maxsize(650, 410)
+
+        upper_frame = Frame(sub_window, width=650, height=55, bg='#333333')
+        middle_frame = Frame(sub_window, width=650, height=355, bg='#333333')
+
+        Label(
+            upper_frame,
+            text="Saved Accounts",
+            font=('Kamerik 105 W00 Bold', 24),
+            bg='#333333',
+            fg='#75E6DA'
+        ).grid(
+            row=0,
+            column=0,
+            pady=(15, 0)
+        )
+
+        upper_frame.pack()
