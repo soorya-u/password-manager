@@ -88,7 +88,7 @@
 - [ ] Display All Errors done by Users
 - [x] Welcome Message
 - [x] Account Form Window
-- [ ] Table Subwindow
+- [x] Table Subwindow
 - [ ] Dropdown Subwindow
 
 ### Others
