@@ -88,6 +88,7 @@
 - [ ] Display All Errors done by Users
 - [x] Welcome Message
 - [x] Account Form Window
+- [ ] Table Subwindow
 - [ ] Dropdown Subwindow
 
 ### Others
@@ -98,7 +99,7 @@
 - [x] SignUp Backend Function
 - [x] Login and Register Main Function
 - [x] Account Form Function
-- [ ] Account List Function
+- [x] Account List Function
 
 [^doc_cryptography]: [*cryptography*](https://cryptography.io/en/latest/)
 [^doc_sqlite3]: [*sqlite3*](https://docs.python.org/3/library/sqlite3.html)
