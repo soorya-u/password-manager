@@ -105,7 +105,7 @@ def formAndList() -> None:
     global footer_frame
     footer_frame = Frame(frmLstWindow, bg='#333333')
 
-    GUI.welcomeMsg(header_frame, userData[1])
+    GUI.welcomeMsg(header_frame, userData[1], getAccountTable)
     GUI.accountForm(main_frame, addAccount, getGeneratedPassword)
 
     header_frame.pack()
@@ -137,7 +137,21 @@ def getGeneratedPassword(n: int = 15) -> str:
         p = Hashing.generatePassword(n)
         if Regex.verifyPassword(p):
             return p
-       
+        
+def getAccountTable():
+    
+    data = Database.getAccountTable(userData[0])
+    
+    for record in data:
+
+        encrypted_password = record.pop().encode()
+        unique_key = Database.getUserUniqueKey(userData[0]).encode()
+        password = Cryptography.decrypt(encrypted_password, unique_key)
+        record.insert(len(record),password)
+
+getAccountTable()
+
+
 loginAndRegister()
 
 if(exit_code==1):
