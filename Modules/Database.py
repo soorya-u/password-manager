@@ -110,10 +110,16 @@ class Database:
     # * Parameters: Master Username
     # * Return Value: All Account List -> List
     @classmethod
-    def getAccountTable(cls, master_user_name: str):
+    def getAccountTable(cls, master_user_name: str) ->list[list[str]]:
         conn = Database._sqliteConnection()
         c = conn.cursor()
         data = c.execute(f'''select * from {master_user_name}''').fetchall()
+        
+        for i in range(len(data)):
+            list_cell = list(data[i])
+            data.pop(i)
+            data.insert(i,list_cell)
+
         conn.commit()
         conn.close()
         return data
