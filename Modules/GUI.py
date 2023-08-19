@@ -1,6 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from enum import Enum
+import os, sys
 
 
 class Action(Enum):
@@ -16,6 +17,21 @@ class GUI:
     form_geometry = [650, 410]
     __images = []
 
+    # * Function to get Images from AppData
+    # * No Parameters
+    # * No Return Value
+    @classmethod
+    def imagePath(cls) -> str:
+
+        try:
+            base_path = os.path.join(sys._MEIPASS, 'Images')
+        except:
+            base_path = r'.\Images'
+
+        return base_path
+
+
+
     # * Function to Clear Images
     # * No Parameters
     # * No Return Value
@@ -28,10 +44,9 @@ class GUI:
     # * No Return Value
     @classmethod
     def frmLstInit(cls):
-        import_tick_image = Image.open(r".\Images\tick_image.png")
-        import_cross_image = Image.open(r".\Images\cross_image.png")
-        import_generate_password_image = Image.open(
-            r".\Images\generate_password.png")
+        import_tick_image = Image.open(GUI.imagePath()+r"\tick_image.png")
+        import_cross_image = Image.open(GUI.imagePath()+r"\cross_image.png")
+        import_generate_password_image = Image.open(GUI.imagePath()+r"\generate_password.png")
         resized_tick_image = import_tick_image.resize(
             (40, 40), Image.LANCZOS)
         resized_cross_image = import_cross_image.resize(
@@ -48,8 +63,8 @@ class GUI:
     # * No Return Value
     @classmethod
     def lgnRegInit(cls):
-        import_tick_image = Image.open(r".\Images\tick_image.png")
-        import_cross_image = Image.open(r".\Images\cross_image.png")
+        import_tick_image = Image.open(GUI.imagePath()+r"\tick_image.png")
+        import_cross_image = Image.open(GUI.imagePath()+r"\cross_image.png")
         resized_tick_image = import_tick_image.resize(
             (40, 40), Image.LANCZOS)
         resized_cross_image = import_cross_image.resize(
@@ -466,8 +481,9 @@ class GUI:
         f.pack(anchor='w', fill='x')
 
     # * Account Form Screen
-    # * Parameters: root, Add Account -> Function, Get Generated Password-> Function
+    # * Parameters: root
     # * No Return Value
+
     @classmethod
     def accountForm(cls, root: Frame, addAccount, getGeneratedPassword):
 
