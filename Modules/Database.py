@@ -1,15 +1,16 @@
 import os
 import sqlite3
 
-
 class Database:
+
+    app_data = os.getenv('LOCALAPPDATA')
 
     # * Function to Establish SQLite Connection
     # * No Parameters
     # * Return Value: Connection
     @classmethod
     def _sqliteConnection(cls):
-        conn = sqlite3.connect(r'.database/database.db')
+        conn = sqlite3.connect(cls.app_data+r'/Ash_SU7/Password Manager/.database/database.db')
         return conn
 
     # * Function to Create userTable
@@ -17,8 +18,12 @@ class Database:
     # * No Return Value
     @classmethod
     def init(cls) -> None:
-        if not os.path.exists('.database'):
-            os.mkdir('.database')
+        if not os.path.exists(cls.app_data+r'/Ash_SU7'):
+
+            os.mkdir(cls.app_data+r'/Ash_SU7')
+            os.mkdir(cls.app_data+r'/Ash_SU7'+r'/Password Manager')
+            os.mkdir(cls.app_data+r'/Ash_SU7'+r'/Password Manager'+r'/.database')
+
             conn = Database._sqliteConnection()
             c = conn.cursor()
             c.execute('''
