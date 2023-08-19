@@ -1,7 +1,8 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from enum import Enum
-import os, sys
+import os
+import sys
 
 
 class Action(Enum):
@@ -30,11 +31,10 @@ class GUI:
 
         return base_path
 
-
-
     # * Function to Clear Images
     # * No Parameters
     # * No Return Value
+
     @classmethod
     def clearImg(cls):
         cls.__images.clear()
@@ -46,7 +46,8 @@ class GUI:
     def frmLstInit(cls):
         import_tick_image = Image.open(GUI.imagePath()+r"\tick_image.png")
         import_cross_image = Image.open(GUI.imagePath()+r"\cross_image.png")
-        import_generate_password_image = Image.open(GUI.imagePath()+r"\generate_password.png")
+        import_generate_password_image = Image.open(
+            GUI.imagePath()+r"\generate_password.png")
         resized_tick_image = import_tick_image.resize(
             (40, 40), Image.LANCZOS)
         resized_cross_image = import_cross_image.resize(
@@ -389,7 +390,7 @@ class GUI:
                 signUpFunction(first_name.get(),
                                master_user_name.get(), master_password.get()),
                 e_first_name.delete(0, END), e_master_user_name.delete(
-                    0, END), e_master_password(0, END)
+                    0, END), e_master_password.delete(0, END)
             ],
             text="Sign Up",
             font=('Kamerik 105 W00 Bold', 10),
