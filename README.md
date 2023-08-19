@@ -33,6 +33,7 @@
 ### Other Modules
 
 - `os`[^doc_os]
+- `sys`[^doc_sys]
 - `PIL`[^doc_PIL]
 - `enum`[^doc_enum]
 - `random`[^doc_random]
@@ -56,7 +57,7 @@
 
 ### Database Tasks
 
-- [ ] Creating a Default Path of Database inside AppData
+- [x] Creating a Default Path of Database inside AppData
 - [x] Creation and Initialization of Database
 - [ ] Altering Read-Write Permissions of Database
 - [x] Establishing Database Connection
@@ -107,6 +108,7 @@
 [^doc_hashlib]: [*hashlib*](https://docs.python.org/3/library/hashlib.html#)
 [^doc_re]: [*re*](https://docs.python.org/3/library/re.html)
 [^doc_os]: [*os*](https://docs.python.org/3/library/os.html)
+[^doc_sys]: [*sys*](https://docs.python.org/3/library/sys.html)
 [^doc_PIL]: [*PIL*](https://pypi.org/project/Pillow/)
 [^doc_enum]: [*enum*](https://docs.python.org/3/library/enum.html)
 [^doc_random]: [*random*](https://docs.python.org/3/library/random.html)
