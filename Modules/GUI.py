@@ -782,6 +782,10 @@ class GUI:
         for record in account_list:
 
             j = 0
+            if i==len(account_list):
+                padding_bottom = 20
+            else:
+                padding_bottom = 0
 
             for cell_data in record:
 
@@ -797,7 +801,8 @@ class GUI:
                 ).grid(
                     row=i,
                     column=j,
-                    ipady=7
+                    ipady=7,
+                    pady=(0,padding_bottom)
                 )
 
                 j += 1
