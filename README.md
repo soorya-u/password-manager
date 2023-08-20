@@ -38,6 +38,7 @@
 - `enum`[^doc_enum]
 - `random`[^doc_random]
 - `wonderwords`[^doc_wonderwords]
+- `pyglet`[^doc_pyglet]
 
 ## Objectives
 
@@ -78,6 +79,7 @@
 
 ### Graphical User Interface Tasks
 
+- [x] Adding Custom Fonts
 - [x] Setting Dimensions for Each Window
 - [x] Initialization of Images For Login and Register Window
 - [x] Initialization of Images For Account Form Window and Dropdown Subwindow
@@ -113,3 +115,4 @@
 [^doc_enum]: [*enum*](https://docs.python.org/3/library/enum.html)
 [^doc_random]: [*random*](https://docs.python.org/3/library/random.html)
 [^doc_wonderwords]: [*wonderwords*](https://pypi.org/project/wonderwords/)
+[^doc_pyglet]: [*pyglet*](https://pyglet.org/)
