@@ -1,6 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from enum import Enum
+import pyglet
 import os
 import sys
 
@@ -20,7 +21,7 @@ class GUI:
 
     # * Function to get Images from AppData
     # * No Parameters
-    # * No Return Value
+    # * Return: Base Path -> String
     @classmethod
     def imagePath(cls) -> str:
 
@@ -30,6 +31,27 @@ class GUI:
             base_path = r'.\Images'
 
         return base_path
+    
+    # * Function to get Fonts from AppData
+    # * No Parameters
+    # * Return Value: Base Path -> String
+    @classmethod
+    def fontPath(cls) -> str:
+
+        try:
+            base_path = os.path.join(sys._MEIPASS, 'Fonts')
+        except:
+            base_path = r'.\Fonts'
+
+        return base_path
+    
+    # * Function to import Fonts
+    # * No Parameters
+    # * No Return Value
+    @classmethod
+    def fontInit(cls):
+        pyglet.font.add_file(cls.fontPath()+r'\JetBrains Mono Medium.ttf')
+        pyglet.font.add_file(cls.fontPath()+r'\Kamerik 105 W00 Bold.ttf')
 
     # * Function to Clear Images
     # * No Parameters
@@ -760,6 +782,10 @@ class GUI:
         for record in account_list:
 
             j = 0
+            if i==len(account_list):
+                padding_bottom = 20
+            else:
+                padding_bottom = 0
 
             for cell_data in record:
 
@@ -775,7 +801,8 @@ class GUI:
                 ).grid(
                     row=i,
                     column=j,
-                    ipady=7
+                    ipady=7,
+                    pady=(0,padding_bottom)
                 )
 
                 j += 1
