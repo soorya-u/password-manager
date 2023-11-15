@@ -5,7 +5,6 @@ from Modules.Hashing import *
 from Modules.Regex import *
 
 Database.init()
-GUI.fontInit()
 
 userData = []
 exit_code = -1

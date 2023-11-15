@@ -1,7 +1,6 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from enum import Enum
-import pyglet
 import os
 import sys
 
@@ -31,27 +30,6 @@ class GUI:
             base_path = r'.\Images'
 
         return base_path
-    
-    # * Function to get Fonts from AppData
-    # * No Parameters
-    # * Return Value: Base Path -> String
-    @classmethod
-    def fontPath(cls) -> str:
-
-        try:
-            base_path = os.path.join(sys._MEIPASS, 'Fonts')
-        except:
-            base_path = r'.\Fonts'
-
-        return base_path
-    
-    # * Function to import Fonts
-    # * No Parameters
-    # * No Return Value
-    @classmethod
-    def fontInit(cls):
-        pyglet.font.add_file(cls.fontPath()+r'\JetBrains Mono Medium.ttf')
-        pyglet.font.add_file(cls.fontPath()+r'\Kamerik 105 W00 Bold.ttf')
 
     # * Function to Clear Images
     # * No Parameters
