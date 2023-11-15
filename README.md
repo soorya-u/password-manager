@@ -8,8 +8,4 @@
 
 ## Production Library
 
-### **Pyinstaller -** *Win32*
-
-`PyInstaller`[^doc_pyinstaller] bundles a Python application and all its dependencies into a single package. The user can run the packaged app without installing a Python interpreter or any modules.
-
-[^doc_pyinstaller]: [*pyinstaller*](https://pyinstaller.org/en/stable/)
+[*PyInstaller*](https://pyinstaller.org/en/stable/) bundles a Python application and all its dependencies into a single package. The user can run the packaged app without installing a Python interpreter or any modules.
