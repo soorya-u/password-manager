@@ -1,10 +1,6 @@
-from Modules.Cryptography import *
-from Modules.Database import *
-from Modules.GUI import *
-from Modules.Hashing import *
-from Modules.Regex import *
+from tkinter import *
 
-Database.init()
+from Modules import Database, GUI, Hashing, Cryptography, Regex, Action
 
 userData = []
 exit_code = -1
@@ -13,15 +9,18 @@ loginGeo = GUI.login_geometry
 regGeo = GUI.register_geometry
 frmGeo = GUI.form_geometry
 
+
 def lgnToReg(event) -> None:
     lgnRegWindow.geometry(f'{regGeo[0]}x{regGeo[1]}')
     main_frame.winfo_children()[0].destroy()
     GUI.register(main_frame, signUpFunction, regToLgn)
 
+
 def regToLgn(event) -> None:
     lgnRegWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
     main_frame.winfo_children()[0].destroy()
     GUI.login(main_frame, signInFunction, lgnToReg)
+
 
 def signUpFunction(first_name: str, master_user_name: str, master_password: str) -> None:
 
@@ -46,6 +45,7 @@ def signUpFunction(first_name: str, master_user_name: str, master_password: str)
                 footer_frame.winfo_children()[0].destroy()
             GUI.unsuccessfullMessage(footer_frame, Action.Register)
 
+
 def signInFunction(master_user_name: str, master_password: str) -> None:
 
     try:
@@ -67,6 +67,7 @@ def signInFunction(master_user_name: str, master_password: str) -> None:
             footer_frame.winfo_children()[0].destroy()
         GUI.unsuccessfullMessage(footer_frame, Action.LogIn)
 
+
 def loginAndRegister() -> None:
 
     global lgnRegWindow
@@ -87,6 +88,7 @@ def loginAndRegister() -> None:
     footer_frame.pack()
 
     lgnRegWindow.mainloop()
+
 
 def formAndList() -> None:
 
@@ -114,44 +116,52 @@ def formAndList() -> None:
 
     frmLstWindow.mainloop()
 
+
 def addAccount(platform: str, url: str, email: str, user_name: str, password: str):
-    
+
     try:
         unique_key = Database.getUserUniqueKey(userData[0]).encode()
-        encrypted_password = Cryptography.encrypt(password, unique_key).decode()
+        encrypted_password = Cryptography.encrypt(
+            password, unique_key).decode()
         del unique_key
-        Database.accountInsertion(userData[0], platform, url, email, user_name, encrypted_password)
+        Database.accountInsertion(
+            userData[0], platform, url, email, user_name, encrypted_password)
         if len(footer_frame.winfo_children()):
-                footer_frame.winfo_children()[0].destroy()
+            footer_frame.winfo_children()[0].destroy()
         GUI.successfullMessage(footer_frame, Action.Account)
-        footer_frame.after(2000, lambda: footer_frame.winfo_children()[0].destroy())
+        footer_frame.after(
+            2000, lambda: footer_frame.winfo_children()[0].destroy())
     except:
         if len(footer_frame.winfo_children()):
             footer_frame.winfo_children()[0].destroy()
         GUI.unsuccessfullMessage(footer_frame, Action.Account)
-        footer_frame.after(2000, lambda: footer_frame.winfo_children()[0].destroy())
+        footer_frame.after(
+            2000, lambda: footer_frame.winfo_children()[0].destroy())
+
 
 def getGeneratedPassword(n: int = 15) -> str:
-    
+
     while True:
         p = Hashing.generatePassword(n)
         if Regex.verifyPassword(p):
             return p
-        
+
+
 def getAccountTable():
-    
+
     data = Database.getAccountTable(userData[0])
-    
+
     for record in data:
 
         encrypted_password = record.pop().encode()
         unique_key = Database.getUserUniqueKey(userData[0]).encode()
         password = Cryptography.decrypt(encrypted_password, unique_key)
-        record.insert(len(record),password)
+        record.insert(len(record), password)
 
     return data
 
+
 loginAndRegister()
 
-if(exit_code==1):
+if (exit_code == 1):
     formAndList()

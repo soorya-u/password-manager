@@ -1,7 +1,6 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from enum import Enum
-import pyglet
 import os
 import sys
 

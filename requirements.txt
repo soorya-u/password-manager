@@ -1,3 +1,5 @@
-cryptography
-Pillow
-wonderwords
+cffi==1.16.0
+cryptography==41.0.7
+pillow==10.2.0
+pycparser==2.21
+wonderwords==2.2.0
