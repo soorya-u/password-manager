@@ -1,6 +1,6 @@
 from tkinter import *
 
-from Modules import Database, GUI, Hashing, Cryptography, Regex, Action
+from modules import Database, GUI, Hashing, Cryptography, Regex, Action
 
 userData = []
 exit_code = -1
@@ -10,19 +10,20 @@ regGeo = GUI.register_geometry
 frmGeo = GUI.form_geometry
 
 
-def lgnToReg(event) -> None:
+def lgnToReg(_) -> None:
     lgnRegWindow.geometry(f'{regGeo[0]}x{regGeo[1]}')
     main_frame.winfo_children()[0].destroy()
     GUI.register(main_frame, signUpFunction, regToLgn)
 
 
-def regToLgn(event) -> None:
+def regToLgn(_) -> None:
     lgnRegWindow.geometry(f'{loginGeo[0]}x{loginGeo[1]}')
     main_frame.winfo_children()[0].destroy()
     GUI.login(main_frame, signInFunction, lgnToReg)
 
 
 def signUpFunction(first_name: str, master_user_name: str, master_password: str) -> None:
+
 
     if Regex.verifyMasterUserName(master_user_name) and Regex.verifyPassword(master_password):
         hashed_password = Hashing.creatingHash(master_password)
@@ -45,6 +46,12 @@ def signUpFunction(first_name: str, master_user_name: str, master_password: str)
                 footer_frame.winfo_children()[0].destroy()
             GUI.unsuccessfullMessage(footer_frame, Action.Register)
 
+    else:
+        print("Not a valid Username or Password")
+        if len(footer_frame.winfo_children()):
+            footer_frame.winfo_children()[0].destroy()
+        GUI.unsuccessfullMessage(footer_frame, Action.Register)
+
 
 def signInFunction(master_user_name: str, master_password: str) -> None:
 
@@ -61,6 +68,11 @@ def signInFunction(master_user_name: str, master_password: str) -> None:
             footer_frame.after(1000, lambda: lgnRegWindow.destroy())
             global exit_code
             exit_code = 1
+        else:
+            if len(footer_frame.winfo_children()):
+                footer_frame.winfo_children()[0].destroy()
+            GUI.unsuccessfullMessage(footer_frame, Action.LogIn)
+
 
     except:
         if len(footer_frame.winfo_children()):

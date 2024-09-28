@@ -25,9 +25,9 @@ class GUI:
     def imagePath(cls) -> str:
 
         try:
-            base_path = os.path.join(sys._MEIPASS, 'Images')
+            base_path = os.path.join(sys._MEIPASS, 'images')
         except:
-            base_path = r'.\Images'
+            base_path = r'.\images'
 
         return base_path
 

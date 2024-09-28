@@ -1,7 +1,8 @@
-from .Cryptography import Cryptography
-from .Database import Database
-from .GUI import GUI, Action
-from .Regex import Regex
+from .cryptography import Cryptography
+from .database import Database
+from .gui import GUI, Action
+from .regex import Regex
+from .hashing import Hashing
 
 
 Database.init()

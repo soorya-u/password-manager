@@ -22,9 +22,7 @@ class Database:
     def init(cls) -> None:
         if not os.path.exists(cls.app_data+r'/zAsh7'):
 
-            os.mkdir(cls.app_data+r'/zAsh7')
-            os.mkdir(cls.app_data+r'/zAsh7'+r'/Password Manager')
-            os.mkdir(cls.app_data+r'/zAsh7'+r'/Password Manager'+r'/.database')
+            os.makedirs(cls.app_data+r'/zAsh7'+r'/Password Manager'+r'/.database')
 
             conn = Database._sqliteConnection()
             c = conn.cursor()
